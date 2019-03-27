@@ -2,7 +2,7 @@
 <div class="bg-light py-3">
       <div class="container">
         <div class="row">
-          <div class="col-md-12 mb-0"><a href="index.html">Home</a> <span class="mx-2 mb-0">/</span> <strong class="text-black">Shop</strong></div>
+          <div class="col-md-12 mb-0"><a href="<?php echo URLROOT; ?>">Home</a> <span class="mx-2 mb-0">/</span> <strong class="text-black">Shop</strong></div>
         </div>
       </div>
     </div>
@@ -57,10 +57,10 @@
             <div class="border p-4 rounded mb-4">
               <h3 class="mb-3 h6 text-uppercase text-black d-block">Categories</h3>
               <ul class="list-unstyled mb-0">
-                <li class="mb-1"><button class="d-flex category-link" id="fig" data="<?php echo URLROOT; ?>/shops/index/fig"><span>Figure</span> <span class="text-black ml-auto">(2,220)</span></button></li>
-                <li class="mb-1"><a href="#" class="d-flex category-link" id="plu"><span>Plush</span> <span class="text-black ml-auto">(2,550)</span></a></li>
-                <li class="mb-1"><a href="#" class="d-flex category-link" id="hat"><span>Hat</span> <span class="text-black ml-auto">(2,124)</span></a></li>
-                <li class="mb-1"><a href="#" class="d-flex category-link" id="shi"><span>Shirt</span> <span class="text-black ml-auto">(2,124)</span></a></li>
+                <li class="mb-1"><button class="category-btn d-flex category-link" id="fig" data="<?php echo URLROOT; ?>/shops/index/category=fig"><span><i class="fas fa-paw"></i>  Figure</span> <span class="ml-auto">(2,220)</span></button></li>
+                <li class="mb-1"><button class="category-btn d-flex category-link" id="plu" data="<?php echo URLROOT; ?>/shops/index/category=plu"><span><i class="fas fa-cat"></i> Plush</span> <span class="ml-auto">(2,550)</span></button></li>
+                <li class="mb-1"><button class="category-btn d-flex category-link" id="hat" data="<?php echo URLROOT; ?>/shops/index/category=hat"><span><i class="fas fa-hat-wizard"></i> Hat</span> <span class="ml-auto">(2,124)</span></button></li>
+                <li class="mb-1"><button class="category-btn d-flex category-link" id="shi" data="<?php echo URLROOT; ?>/shops/index/category=shi"><span><i class="fas fa-tshirt"></i> Shirt</span> <span class="ml-auto">(2,124)</span></button></li>
               </ul>
             </div>
 
