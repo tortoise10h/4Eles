@@ -63,7 +63,20 @@ html{
     box-shadow:0px 1px 0px #3d35b2; 
 }
 
-.shop-img-box{
-    min-height:410px;
-    max-height:410px;
+
+.img-card figure img{
+    min-height:250px;
+    max-height:250px;
+}
+
+.img-card-name{
+    height:70px;
+}
+
+.img-card-name h3 a{
+    font-size:16px;
+}
+
+.img-card-price{
+    font-size:18px;
 }

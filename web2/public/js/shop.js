@@ -55,15 +55,17 @@ $(document).ready(function(){
 function createProductShow(products){
     let text = '';
     $.each(products,function(tag,product){
-        text += '<div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">' +
-                    '<div class="shop-img-box block-4 text-center border">' +
+        text += '<div class="img-card col-sm-6 col-lg-4 mb-4" data-aos="fade-up">' +
+                    '<div class="block-4 text-center border">' +
                     '<figure class="block-4-image">' + 
-                        '<a href="#"><img src="http://localhost:8080/' + product.imgLink + '/' + product.id + '_1.jpg"' + 'class="img-fluid"></a>' +
+                        '<a href="http://localhost:8080/web2/shops/productDetail/' + product.categoryID + '/' + product.id +'"><img src="http://localhost:8080/web2' + product.imgLink + '/' + product.id + '_1.jpg"' + 'class="img-fluid"></a>' +
                     '</figure>' +
-                    '<div class="block-4-text p-4">' +
-                        '<h3><a href="#">'+ product.name + '</a></h3>' +
-                        '<p class="text-primary font-weight-bold">'+ product.price +'</p>' +
+                    '<div class="img-card-name block-4-text p-4">' +
+                        '<h3><a href="http://localhost:8080/web2/shops/productDetail/' + product.categoryID + '/' + product.id +'">'+ product.name + '</a></h3>' +
                     '</div>'+
+                    '<div class="img-card-price block-4-text p-4">' +
+                        '<p class="text-primary font-weight-bold">$'+ product.price +'</p>' +
+                    '</div>' +
                     '</div>' +
                 '</div>';    
     });

@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/aos.css">
 
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/style.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/product-detail.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/core-custom.css">
     
     

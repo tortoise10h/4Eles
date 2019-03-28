@@ -18,14 +18,7 @@
                 <div class="float-md-left mb-4"><h2 class="text-black h5">Shop All</h2></div>
                 <div class="d-flex">
                   <div class="dropdown mr-1 ml-md-auto">
-                    <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Latest
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
-                      <a class="dropdown-item" href="#">Men</a>
-                      <a class="dropdown-item" href="#">Women</a>
-                      <a class="dropdown-item" href="#">Children</a>
-                    </div>
+                    
                   </div>
                   <div class="btn-group">
                     <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" id="dropdownMenuReference" data-toggle="dropdown">Reference</button>
@@ -70,9 +63,16 @@
                 <div id="slider-range" class="border-primary"></div>
                 <input type="text" name="text" id="amount" class="form-control border-0 pl-0 bg-white" disabled="" />
               </div>
+              
+              <div class="mb-4">
+                <h3 class="mb-3 h6 text-uppercase text-black d-block">Filter by Price</h3>
+                <div class="form-group">
+                  <input type="text" name="search-in-shop" placeholder="Type to search" class="form-control">
+                </div>
+              </div>
 
               <div class="mb-4">
-                <h3 class="mb-3 h6 text-uppercase text-black d-block">Color</h3>
+                <h3 class="mb-3 h6 text-uppercase text-black d-block">Filter By Color</h3>
                 <a href="#" class="d-flex color-item align-items-center" >
                   <span class="bg-danger color d-inline-block rounded-circle mr-2"></span> <span class="text-black">Red (2,429)</span>
                 </a>
@@ -100,36 +100,47 @@
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-sm-6 col-md-6 col-lg-4 mb-4 mb-lg-0" data-aos="fade" data-aos-delay="">
+                  <div class="col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0" data-aos="fade" data-aos-delay="">
                     <a class="block-2-item" href="#">
                       <figure class="image">
-                        <img src="images/women.jpg" alt="" class="img-fluid">
+                        <img src="<?php echo URLROOT;?>/images/banner/figure-banner.jpg" alt="" class="category-banner-img img-fluid">
                       </figure>
                       <div class="text">
                         <span class="text-uppercase">Collections</span>
-                        <h3>Women</h3>
+                        <h3>Figures</h3>
                       </div>
                     </a>
                   </div>
-                  <div class="col-sm-6 col-md-6 col-lg-4 mb-5 mb-lg-0" data-aos="fade" data-aos-delay="100">
+                  <div class="col-sm-6 col-md-6 col-lg-3 mb-5 mb-lg-0" data-aos="fade" data-aos-delay="100">
                     <a class="block-2-item" href="#">
                       <figure class="image">
-                        <img src="images/children.jpg" alt="" class="img-fluid">
+                        <img src="<?php echo URLROOT;?>/images/banner/plush-banner.jpg" alt="" class="category-banner-img img-fluid">
                       </figure>
                       <div class="text">
                         <span class="text-uppercase">Collections</span>
-                        <h3>Children</h3>
+                        <h3>Plushes</h3>
                       </div>
                     </a>
                   </div>
-                  <div class="col-sm-6 col-md-6 col-lg-4 mb-5 mb-lg-0" data-aos="fade" data-aos-delay="200">
+                  <div class="col-sm-6 col-md-6 col-lg-3 mb-5 mb-lg-0" data-aos="fade" data-aos-delay="200">
                     <a class="block-2-item" href="#">
                       <figure class="image">
-                        <img src="images/men.jpg" alt="" class="img-fluid">
+                        <img src="<?php echo URLROOT;?>/images/banner/hat-banner.jpg" alt="" class="category-banner-img img-fluid">
                       </figure>
                       <div class="text">
                         <span class="text-uppercase">Collections</span>
-                        <h3>Men</h3>
+                        <h3>Hats</h3>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="col-sm-6 col-md-6 col-lg-3 mb-5 mb-lg-0" data-aos="fade" data-aos-delay="200">
+                    <a class="block-2-item" href="#">
+                      <figure class="image">
+                        <img src="<?php echo URLROOT;?>/images/banner/shirt-banner.jpg" alt="" class="category-banner-img img-fluid">
+                      </figure>
+                      <div class="text">
+                        <span class="text-uppercase">Collections</span>
+                        <h3>Shirts</h3>
                       </div>
                     </a>
                   </div>

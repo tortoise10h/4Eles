@@ -8,6 +8,14 @@
             $this->view('shops/index');
         }
 
+        public function productDetail($categoryID,$productID){
+            $product = $this->shopModel->getProductDetail($productID);
+            $data = [
+                'product' => $product,
+                'categoryID' => $categoryID
+            ];
+            $this->view('shops/product-detail',$data);
+        }
         
         public function showProducts($categoryID,$page = 1){
             //FOR AJAX LOAD PRODUCT

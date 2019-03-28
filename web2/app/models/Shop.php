@@ -29,5 +29,13 @@
             $numOfProduct = $this->db->rowCount();
             return $numOfProduct;
         }
+
+        public function getProductDetail($productID){
+            $this->db->query("SELECT * FROM products WHERE id = :id");
+            $this->db->bind(':id',$productID);
+            $row = $this->db->singleResult();
+            return $row;
+        }
+        
     }
 ?> 

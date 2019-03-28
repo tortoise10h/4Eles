@@ -87,6 +87,8 @@
   <script src="<?php echo URLROOT; ?>/js/main.js"></script>
   <script src="<?php echo URLROOT; ?>/js/form-usecase.js"></script>
   <script src="<?php echo URLROOT; ?>/js/shop.js"></script>
+  <script src="<?php echo URLROOT; ?>/js/product-detail.js"></script>
+
     
   </body>
 </html>
