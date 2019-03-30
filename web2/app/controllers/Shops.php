@@ -5,7 +5,8 @@
         }
 
         public function index(){
-            $this->view('shops/index');
+            $categoryQuantity = $this->shopModel->countCategoryQuantity();
+            $this->view('shops/index',$categoryQuantity);
         }
 
         public function productDetail($categoryID,$productID){
@@ -51,6 +52,51 @@
             ];
             
             echo json_encode($result);
+        }
+
+        public function addToCart($productID,$quantity,$userID){
+            $quantity = (int)$quantity;
+            if(!empty($_SESSION['cart-product'])){
+                // echo 'SESSION IS NOT EMPTY';
+                $cartProducts = $_SESSION['cart-product'];
+                $duplicateProductIndex = -1;
+                //CHECK FOR DUPLICATE PRODUCT
+                for($i = 0; $i < count($cartProducts); $i++){
+                    if($cartProducts[$i]['productID'] == $productID && $cartProducts[$i]['userID'] == $userID){
+                        $duplicateProductIndex = $i;
+                        break;
+                    }
+                }
+                if($duplicateProductIndex == -1){
+                    //new product is not duplicate with another
+                    $cartProducts[] = [
+                        'productID' => $productID,
+                        'quantity' => $quantity,
+                        'userID' => $userID
+                    ];
+                }else{
+                    //duplicate product -> just set new quantity
+                    $oldQuantity = (int)$cartProducts[$duplicateProductIndex]['quantity'];
+                    $newQuantity = $oldQuantity + (int)$quantity;
+                    $cartProducts[$duplicateProductIndex]['quantity'] = $newQuantity;
+                }
+                $_SESSION['cart-product'] = $cartProducts;
+                $test = $_SESSION['cart-product'];
+                echo json_encode($test);
+            }else{
+                // echo 'SESSION empty';
+                $cartProducts = [];
+                $cartProducts[] = [
+                    'productID' => $productID,
+                    'quantity' => $quantity,
+                    'userID' => $userID
+                ];
+                $_SESSION['cart-product'] = $cartProducts;
+                $test = $_SESSION['cart-product'];
+                echo json_encode($test);
+            }
+            // unset($_SESSION['cart-product']);
+
         }
         
     }

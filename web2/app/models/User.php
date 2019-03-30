@@ -7,10 +7,18 @@
         }
 
         public function register($data){
-            $this->db->query('INSERT INTO users(name,email,password) VALUES(:name,:email,:password)');
+            $this->db->query('INSERT INTO users(firstname,lastname,email,phone,sex,address,password) VALUES(:firstname,:lastname,:email,:phone,:sex,:address,:password)');
 
-            $this->db->bind(':name',$data['name']);
+            $this->db->bind(':firstname',$data['firstname']);
+            $this->db->bind(':lastname',$data['lastname']);
             $this->db->bind(':email',$data['email']);
+            $this->db->bind(':phone',$data['phone']);
+            if($data['sex'] == 'male'){
+                $this->db->bind(':sex',true);
+            }else{
+                $this->db->bind(':sex',false);
+            }
+            $this->db->bind(':address',$data['address']);
             $this->db->bind(':password',$data['password']);
 
             if($this->db->execute()){

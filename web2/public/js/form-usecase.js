@@ -5,77 +5,101 @@ $(document).ready(function(){
     //CATCH REGISTER FORM SUBMIT EVENT
     registerSubmit.click(function(e){
         e.preventDefault();
-        let name = $('#register-form input[name="name"]').val();
+        let firstName = $('#register-form input[name="first-name"]').val();
+        let lastName = $('#register-form input[name="last-name"]').val();
         let email = $('#register-form input[name="email"]').val();
         let password = $('#register-form input[name="password"]').val();
         let confirmPass = $('#register-form input[name="confirm-password"]').val();
+        let phone = $('#register-form input[name="phone"]').val();
+        let sexes = $('#register-sex-group input[name="sex"]');
+        let address = $('#register-address-group input[name="address"]').val();
+        let sex;
         let is_ok = true;
-        // console.log(name);
 
-        //validate name
-        if(name == ''){
-            $('#register-name-err').html('Please enter name');
-            $('#register-name-group input').addClass('alert alert-danger');
-            is_ok = false;
-        }else{
-            $('#register-name-err').html('');
-            $('#register-name-group input').removeClass('alert alert-danger');   
+        //GET SEX
+        for(let i = 0; i < sexes.length; i++){
+            if(sexes[i].checked){
+                sex = sexes[i].value;
+            }
         }
 
-        //validate email
-        if(email == ''){
-            $('#register-email-err').html('Please enter email');
-            $('#register-email-group input').addClass('alert alert-danger');
-            is_ok = false;
-        }else{
-            $('#register-email-err').html('');
-            $('#register-email-group input').removeClass('alert alert-danger');   
-        }
+        //CHECK EMPTY FIELD
+        is_ok = checkEmptyField(firstName,'#register-first-name-group','#register-first-name-err','Please enter your first name');
+        is_ok = checkEmptyField(lastName,'#register-last-name-group','#register-last-name-err','Please enter your last name');
+        is_ok = checkEmptyField(email,'#register-email-group','#register-email-err','Please enter email');
+        is_ok = checkEmptyField(phone,'#register-phone-group','#register-phone-err','Please enter your phone number');
+        is_ok = checkEmptyField(password,'#register-password-group','#register-password-err','Please enter password');
+        is_ok = checkEmptyField(confirmPass,'#register-confirmPass-group','#register-confirmPass-err','Please enter confirm password');
 
-        //validate password
-        if(password == ''){
-            $('#register-password-err').html('Please enter password');
-            $('#register-password-group input').addClass('alert alert-danger');
-            is_ok = false;
-        }else{
-            $('#register-password-err').html('');
-            $('#register-password-group input').removeClass('alert alert-danger');   
-        }
-
-        //validate confirm password
-        if(confirmPass == ''){
-            $('#register-confirmPass-err').html('Please enter confirm password');
-            $('#register-confirmPass-group input').addClass('alert alert-danger');
-            is_ok = false;
-        }else{
-            if(confirmPass != password){
-                $('#register-confirmPass-err').html('Password and confirm password are not match');
-                $('#register-confirmPass-group input').addClass('alert alert-danger');
+        if(is_ok == true){
+            //validate first name
+            if(/^[^\d\[\]`!@#$%^&*()_+\\{}|;':\",./<>?]*$/.test(firstName) == false){
+                alertMessage("#register-first-name-group","#register-first-name-err","Your first name is NOT VALID, we don't allow special characters and digit","alert alert-danger",true);
                 is_ok = false;
             }else{
-                $('#register-confirmPass-err').html('');
-                $('#register-confirmPass-group input').removeClass('alert alert-danger')
+                alertMessage("#register-first-name-group","#register-first-name-err","",false);
+            }
+
+            //validate last name
+            if(/^[^\d\[\]`!@#$%^&*()_+\\{}|;':\",./<>?]*$/.test(lastName) == false){
+                alertMessage("#register-last-name-group","#register-last-name-err","Your last name is NOT VALID, we don't allow special characters and digit","alert alert-danger",true);
+                is_ok = false;
+            }else{
+                alertMessage("#register-last-name-group","#register-last-name-err","",false);
+            }
+
+            //validate email
+            if(/^[a-z][a-z0-9_\.]{5,32}@\D{2,}(\.\D{2,4}){1,2}$/.test(email) == false){
+                alertMessage("#register-email-group","#register-email-err","Your email is NOT VALID","alert alert-danger",true);
+                is_ok = false;
+            }else{
+                alertMessage("#register-email-group","#register-email-err","",false);
+            }
+
+            //validate password
+            if(password.length < 6){
+                alertMessage("#register-password-group","#register-password-err","Your password have to has at least 6 characters","alert alert-danger",true);
+                is_ok = false;
+            }else{
+                alertMessage("#register-password-group","#register-password-err","",false);
+            }
+
+            //validate confirm password
+            if(confirmPass != password){
+                alertMessage("#register-confirmPass-group","#register-confirmPass-err","Your confirm password does not match your password","alert alert-danger",true);
+                is_ok = false;
+            }else{
+                alertMessage("#register-confirmPass-group","#register-confirmPass-err","",false);
+            }
+
+            //validate phone if it is not empty
+            if(/^0[1-9]\d{8}$/.test(phone) == false){
+                alertMessage("#register-phone-group","#register-phone-err","Your phone number is NOT VALID","alert alert-danger",true);
+                is_ok = false;
+            }else{
+                alertMessage("#register-phone-group","#register-phone-err","",false);
             }
         }
 
         if(is_ok == true){
-            let formData = "name=" + name + "&email=" + email + "&password=" + password;
+            let formData = "firstname=" + firstName + "&lastname=" + lastName + "&email=" + email + "&password=" + password + "&sex=" + sex + "&phone=" + phone + "&address=" + address;
             $.ajax({
                 url: 'http://localhost:8080/web2/users/register',
                 type: 'POST',
                 cache:false,
                 data: formData,
                 success:function(data){
+                    // console.log(data);
                     let message = $.parseJSON(data);
                     if(message.status == 'success'){
                         $('#register-general-alert').html(message.alert);
-                        $('#register-form input[name="name"]').val('');
+                        $('#register-form input[name="first-name"]').val('');
+                        $('#register-form input[name="last-name"]').val('');
                         $('#register-form input[name="email"]').val('');
+                        $('#register-form input[name="address"]').val('');
+                        $('#register-form input[name="phone"]').val('');
                         $('#register-form input[name="password"]').val('');
                         $('#register-form input[name="confirm-password"]').val('');
-                        // $(function () {
-                        //     $('#registerForm').modal('toggle');
-                        //  });
                          
                     }else if(message.status == 'error'){
                         $('#register-general-alert').html(message.alert);
@@ -88,16 +112,16 @@ $(document).ready(function(){
     //CATCH 'have an account? login'
     $('#loginChange').click(function(){
        $(function(){
-            $('#registerForm').modal('toggle');
-            $('#loginForm').modal('toggle');
+            $('#registerForm').modal('hide');
+            $('#loginForm').modal('show');
        });
     });
 
     //CATCH 'no account? register'
     $('#registerChange').click(function(){
         $(function(){
+            $('#loginForm').modal('toggle');
              $('#registerForm').modal('toggle');
-             $('#loginForm').modal('toggle');
         });
      });
 
@@ -110,25 +134,9 @@ $(document).ready(function(){
         let is_ok = true;
 
 
-        //validate email
-        if(email == ''){
-            $('#login-email-err').html('Please enter email');
-            $('#login-email-group input').addClass('alert alert-danger');
-            is_ok = false;
-        }else{
-            $('#login-email-err').html('');
-            $('#login-email-group input').removeClass('alert alert-danger');   
-        }
-
-        //validate password
-        if(password == ''){
-            $('#login-password-err').html('Please enter password');
-            $('#login-password-group input').addClass('alert alert-danger');
-            is_ok = false;
-        }else{
-            $('#login-password-err').html('');
-            $('#login-password-group input').removeClass('alert alert-danger');   
-        }
+        //VALIDATE EMPTY FIELD
+        is_ok = checkEmptyField(email,'#login-email-group','#login-email-err','Please enter email');
+        is_ok = checkEmptyField(password,'#login-password-group','#login-password-err','Please enter password');
 
         if(is_ok == true){
             let formData = "email=" + email + "&password=" + password;
@@ -138,7 +146,7 @@ $(document).ready(function(){
                 cache:false,
                 data: formData,
                 success:function(data){
-                    console.log(data);
+                    // console.log(data);
                     let message = $.parseJSON(data);
                     if(message.status == 'success'){
                         $('#login-general-alert').html(message.alert);
@@ -162,8 +170,24 @@ $(document).ready(function(){
 });
 
 
+function checkEmptyField(fieldCheck,formGroupID,messageBoxID,message){ 
+    if(fieldCheck == ''){
+        $(messageBoxID).html(message);
+        $(formGroupID + ' input').addClass('alert alert-danger');
+        return false;
+    }else{
+        $(messageBoxID).html('');
+        $(formGroupID + ' input').removeClass('alert alert-danger');
+        return true; 
+    }
+}
 
-// function registerAlert(alertId,formGroupId,element,classesName,message){
-//     $(alertId).html(message);
-//     $(formGroupId + ' ' + element).addClass(classesName);
-// }
+function alertMessage(formGroupID,messageBoxID,message,classesName,is_alert){
+    if(is_alert == true){
+        $(messageBoxID).html(message);
+        $(formGroupID + ' input').addClass(classesName);
+    }else{
+        $(messageBoxID).html('');
+        $(formGroupID + ' input').removeClass(classesName);
+    }
+}

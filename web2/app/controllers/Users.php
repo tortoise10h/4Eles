@@ -11,8 +11,12 @@
                 
                 //init data
                 $data = [
-                    'name' => trim($_POST['name']),
+                    'firstname' => trim($_POST['firstname']),
+                    'lastname' => trim($_POST['lastname']),
                     'email' => trim($_POST['email']),
+                    'phone' => trim($_POST['phone']),
+                    'sex' => trim($_POST['sex']),
+                    'address' => trim($_POST['address']),
                     'password' => trim($_POST['password']),
                 ];
 
@@ -91,7 +95,7 @@
         public function createUserSession($user){
             $_SESSION['user_id'] = $user->id;
             $_SESSION['user_email'] = $user->email;
-            $_SESSION['user_name'] = $user->name;
+            $_SESSION['user_name'] = $user->firstname;
         }
 
         public function logout(){
@@ -99,6 +103,23 @@
             unset($_SESSION['user_email']);
             unset($_SESSION['user_name']);
             header('Location: ' . URLROOT . '/pages/index');
+        }
+
+        public function isLogin(){
+            $result = [];
+            //Use echo for ajax call
+            if(!empty($_SESSION['user_id'])){
+                $result = [
+                    'status' => 'true',
+                    'userID' => $_SESSION['user_id']
+                ];
+            }else{
+                $result = [
+                    'status' => 'false',
+                    'userID' => 'none'
+                ];
+            }
+            echo json_encode($result);
         }
     }
 ?>

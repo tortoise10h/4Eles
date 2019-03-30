@@ -13,7 +13,7 @@
     float: left;
   }
   
-  .product-thumbnail {
+  .product-thumb {
     width: 20%;
     float: left;
     overflow: auto;
@@ -62,11 +62,14 @@
     float: left;
   }
   .product-info .product-title{
+    padding:10px;
     width:100%;
+    color:#333;
   }
   .product-preview {
-    height: 150px;
+    min-height:150px;
   }
+
   
   .product-thumbnail::-webkit-scrollbar {
     width: 0;
@@ -103,4 +106,9 @@
     margin-bottom: 10px;
     border-left: 5px solid #cc3300;
     color: #000;
+  }
+
+  .add-to-wish:hover{
+    color:#f27871;
+    cursor:pointer;
   }

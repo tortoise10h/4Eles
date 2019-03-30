@@ -5,6 +5,42 @@
             $this->db = new Database;
         }
 
+        public function countCategoryQuantity(){
+            $figCount = 0;
+            $pluCount = 0;
+            $hatCount = 0;
+            $shiCount = 0;
+            $this->db->query("SELECT * FROM products");
+            $rows = $this->db->resultSet();
+            foreach($rows as $product){
+                switch($product->categoryID){
+                    case 'fig':{
+                        $figCount++;
+                        break;
+                    }
+                    case 'plu':{
+                        $pluCount++;
+                        break;
+                    }
+                    case 'shi':{
+                        $shiCount++;
+                        break;
+                    }
+                    case 'hat':{
+                        $hatCount++;
+                        break;
+                    }
+                }
+            }
+            $data = [
+                'figCount' => $figCount,
+                'pluCount' => $pluCount,
+                'shiCount' => $shiCount,
+                'hatCount' => $hatCount,
+            ];
+            return $data;
+        }
+
         public function getLimitProducts($record_per_page,$start_from,$categoryID){
             if($categoryID == 'all'){
                 //load all product
@@ -34,7 +70,7 @@
             $this->db->query("SELECT * FROM products WHERE id = :id");
             $this->db->bind(':id',$productID);
             $row = $this->db->singleResult();
-            return $row;
+            return $row;    
         }
         
     }
