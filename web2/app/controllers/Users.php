@@ -60,7 +60,6 @@
                     'email' => trim($_POST['email']),
                     'password' => trim($_POST['password']),
                 ];
-
                 if($this->userModel->findUserByEmail($data['email']) == false){
                     $result = [
                         'alert' => '<p class="alert alert-danger">Email or Password incorrect</p>',
@@ -69,7 +68,6 @@
                     echo json_encode($result);
                     $is_ok = false;
                 }
-
                 if($is_ok == true){
                     $loggedInUser = $this->userModel->login($data['email'],$data['password']);
                     if($loggedInUser){
@@ -91,20 +89,17 @@
                 }
             }
         }
-
         public function createUserSession($user){
             $_SESSION['user_id'] = $user->id;
             $_SESSION['user_email'] = $user->email;
             $_SESSION['user_name'] = $user->firstname;
         }
-
         public function logout(){
             unset($_SESSION['user_id']);
             unset($_SESSION['user_email']);
             unset($_SESSION['user_name']);
             header('Location: ' . URLROOT . '/pages/index');
         }
-
         public function isLogin(){
             $result = [];
             //Use echo for ajax call

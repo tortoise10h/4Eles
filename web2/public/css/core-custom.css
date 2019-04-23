@@ -30,6 +30,7 @@ html{
     border-radius:50%;
     width:40px;
     height:40px;
+    outline:none;
 }
 .pagination-btn:hover{
     background:#7971ea;
@@ -42,6 +43,28 @@ html{
     background:#7971ea;
     color:#fff;
 }
+
+
+.pagination-search-btn{
+    background:#fff;
+    color:#7971ea;
+    cursor:pointer;
+    margin:0 0 0 3px;
+    transition:0.3s;
+    border:1px solid #ccc;
+    border-radius:50%;
+    width:40px;
+    height:40px;
+    outline:none;
+}
+.pagination-search-btn:hover{
+    background:#7971ea;
+    color:#fff;
+}
+.pagination-search-btn:last-child{
+    margin-right:3px;
+}
+
 
 /*FOR SHOP PAGE*/
 .category-btn{
@@ -67,6 +90,10 @@ html{
 .img-card figure img{
     min-height:250px;
     max-height:250px;
+}
+
+.img-card{
+    color:#dddddd;
 }
 
 .img-card-name{

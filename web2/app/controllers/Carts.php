@@ -49,5 +49,45 @@
                 echo json_encode($result);
             }
         }
+
+        public function changeProductQuantity($productID, $userID, $operation){
+            $cartProducts = [];
+            $quantity;
+            if(!empty($_SESSION['cart-product'])){
+                $cartProducts = $_SESSION['cart-product'];
+                for($i = 0; $i < count($cartProducts); $i++){
+                    if($cartProducts[$i]['productID'] == $productID && $cartProducts[$i]['userID'] == $userID){
+                        if($operation == 'add'){
+                            $quantity = (int) $cartProducts[$i]['quantity'];
+                            $quantity++;
+                            $cartProducts[$i]['quantity'] = $quantity;      
+                        }else if($operation == 'sub'){
+                            $quantity = (int) $cartProducts[$i]['quantity'];
+                            $quantity--;
+                            $cartProducts[$i]['quantity'] = $quantity;      
+                        }
+                    }
+                }
+                $_SESSION['cart-product'] = $cartProducts;
+            }
+        }
+
+        public function removeCartProduct($productID,$userID){
+            $cartProducts = [];
+            if(!empty($_SESSION['cart-product'])){
+                $cartProducts = $_SESSION['cart-product'];
+                $pos = -1;
+                for($i = 0; $i < count($cartProducts); $i++){
+                    if($cartProducts[$i]['productID'] == $productID && $cartProducts[$i]['userID'] == $userID){
+                        $pos = $i;
+                    }
+                }
+                if($pos != -1){
+                    unset($cartProducts[$pos]);
+                    $cartProducts = array_values($cartProducts);
+                }
+                $_SESSION['cart-product'] = $cartProducts;
+            }
+        }
     }
 ?>

@@ -54,6 +54,40 @@
             return $products;
         }
 
+        public function getAllProducts(){
+            $this->db->query("SELECT * FROM products ORDER BY created_at DESC");
+            $products = $this->db->resultSet();
+            return $products;
+        }
+
+        public function getLimitSearchProducts($record_per_page,$start_from,$categoryID,$searchValue){
+            // return $searchValue;
+            $query = '';
+            if($categoryID == 'all'){
+                $query .= "SELECT * FROM products ";
+            }else{
+                $query .= "SELECT * FROM products WHERE categoryID = :categoryID ";
+            }
+            
+            if($searchValue != '' && $categoryID != 'all'){
+                $query .= " AND name LIKE '%$searchValue%'"; 
+            }elseif($searchValue != '' && $categoryID == 'all'){
+                $query .= "WHERE name LIKE '%$searchValue%'";
+            }
+
+            $query .= " ORDER BY created_at DESC LIMIT $start_from,$record_per_page";
+
+            // return $query;
+            $this->db->query($query);
+
+            if($categoryID != 'all'){
+                $this->db->bind(':categoryID',$categoryID);
+            }
+
+            $products = $this->db->resultSet();
+            return $products;
+        }
+
         public function countProduct($categoryID){
             if($categoryID == 'all'){
                 $this->db->query("SELECT * FROM products ORDER BY created_at DESC");   
@@ -65,6 +99,32 @@
             $numOfProduct = $this->db->rowCount();
             return $numOfProduct;
         }
+
+        public function countSearchProduct($categoryID,$searchValue){
+            $query = '';
+            if($categoryID == 'all'){
+                $query .= "SELECT * FROM products ";
+            }else{
+                $query .= "SELECT * FROM products WHERE categoryID = :categoryID ";
+            }
+
+            if($searchValue != '' && $categoryID != 'all'){
+                $query .= " AND name LIKE '%$searchValue%'"; 
+            }elseif($searchValue != '' && $categoryID == 'all'){
+                $query .= "WHERE name LIKE '%$searchValue%'";
+            }
+
+            $query .= " ORDER BY created_at DESC";
+            $this->db->query($query);
+            if($categoryID != 'all'){
+                $this->db->bind(':categoryID',$categoryID);
+            }
+
+            $products = $this->db->resultSet();
+            $numOfProduct = $this->db->rowCount();
+            return $numOfProduct;
+        }
+        
 
         public function getProductDetail($productID){
             $this->db->query("SELECT * FROM products WHERE id = :id");

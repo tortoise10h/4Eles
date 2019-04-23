@@ -12,6 +12,7 @@
         
         public function __construct(){
            $url = $this->getUrl();
+        //    print_r($url);
 
            //look in controller with first value of url array
            if(file_exists('../app/controllers/' . $url[0] . '.php')){

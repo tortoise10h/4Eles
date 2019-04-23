@@ -84,11 +84,13 @@
   <script src="<?php echo URLROOT; ?>/js/jquery.magnific-popup.min.js"></script>
   <script src="<?php echo URLROOT; ?>/js/aos.js"></script>
 
+  <script src="<?php echo URLROOT; ?>/js/cookie_helpers.js"></script>
   <script src="<?php echo URLROOT; ?>/js/main.js"></script>
   <script src="<?php echo URLROOT; ?>/js/form-usecase.js"></script>
   <script src="<?php echo URLROOT; ?>/js/shop.js"></script>
   <script src="<?php echo URLROOT; ?>/js/product-detail.js"></script>
   <script src="<?php echo URLROOT; ?>/js/cart.js"></script>
+  <script src="<?php echo URLROOT; ?>/js/searches.js"></script>
 
     
   </body>

@@ -20,7 +20,10 @@
         
         public function showProducts($categoryID,$page = 1){
             //FOR AJAX LOAD PRODUCT
+
             $record_per_page = 9;
+
+            $page = (int) $page;
            
             //for SELECT statement in Shop model
             $start_from = ($page - 1) * $record_per_page;
@@ -52,6 +55,70 @@
             ];
             
             echo json_encode($result);
+        }
+
+        public function showSearchProducts($categoryID,$page = 1,$searchValue){
+            $searchValue = str_replace('--',' ',$searchValue);
+
+            // echo "Search value in shops controller: " . $searchValue;
+            if($searchValue == 'search-all'){
+                $searchValue = '';
+            }   
+            //FOR AJAX LOAD PRODUCT
+            $record_per_page = 9;
+           
+            //for SELECT statement in Shop model
+            $start_from = ($page - 1) * $record_per_page;
+            
+            $products = $this->shopModel->getLimitSearchProducts($record_per_page,$start_from,$categoryID,$searchValue);
+            
+            // echo $products;
+
+            $productArr = [];
+            
+            foreach($products as $product){
+                $productArr[] = [
+                    'id' => $product->id,
+                    'name' => $product->name,
+                    'categoryID' => $product->categoryID,
+                    'price' => $product->price,
+                    'total' => $product->total,
+                    'description' => $product->description,
+                    'imgLink' => $product->imgLink,
+                ];
+            }
+            
+            $totalProduct = $this->shopModel->countSearchProduct($categoryID,$searchValue);
+            $totalPages = ceil($totalProduct / $record_per_page);
+            
+            $result = [
+                'products' => $productArr,
+                'totalPages' => $totalPages,
+                'pageActive' => $page,
+                'categoryID' => $categoryID
+            ];
+            
+            echo json_encode($result);
+        }
+
+        public function getAllProducts(){
+            $products = $this->shopModel->getAllProducts();
+
+            $productArr = [];
+            
+            foreach($products as $product){
+                $productArr[] = [
+                    'id' => $product->id,
+                    'name' => $product->name,
+                    'categoryID' => $product->categoryID,
+                    'price' => $product->price,
+                    'total' => $product->total,
+                    'description' => $product->description,
+                    'imgLink' => $product->imgLink,
+                ];
+            }
+
+            echo json_encode($productArr);
         }
 
         public function addToCart($productID,$quantity,$userID){

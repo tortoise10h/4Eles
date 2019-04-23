@@ -35,7 +35,7 @@
               </div>
             </div>
             <div class="row mb-5" id="productShow">
-            <!-- AJAX WORKSPACE HERE -->
+            <!-- AJAX SHOW PRODUCTS HERE -->
             </div>
             <div class="row aos-init aos-animate" data-aos="fade-up">
               <div class="col-md-12 text-center">
@@ -60,14 +60,29 @@
             <div class="border p-4 rounded mb-4">
               <div class="mb-4">
                 <h3 class="mb-3 h6 text-uppercase text-black d-block">Filter by Price</h3>
-                <div id="slider-range" class="border-primary"></div>
-                <input type="text" name="text" id="amount" class="form-control border-0 pl-0 bg-white" disabled="" />
+                <!-- <div id="slider-range" class="border-primary"></div>
+                <input type="text" name="text" id="amount" class="form-control border-0 pl-0 bg-white" disabled="" /> -->
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <input type="number" name="from-price" placeholder="From Price" id="fromPrice" class="form-control mb-2" style="min-width:50px">  
+                    </div>
+                  
+                    <div class="col-md-12">
+                      <input type="number" name="to-price" placeholder="To Price" id="toPrice" class="form-control" style="min-width:50px">
+                    </div>
+                  </div>
+                </div> 
+
+                <button id="searchByPrice" class="btn btn-primary" style="width:100%">Search</button>
               </div>
               
               <div class="mb-4">
-                <h3 class="mb-3 h6 text-uppercase text-black d-block">Filter by Price</h3>
+                <h3 class="mb-3 h6 text-uppercase text-black d-block">Filter by Name</h3>
                 <div class="form-group">
-                  <input type="text" name="search-in-shop" placeholder="Type to search" class="form-control">
+                  <form action="">
+                    <input id="shopSearch" type="text" name="search-in-shop" placeholder="Type to search" class="form-control">
+                  </form>
                 </div>
               </div>
 

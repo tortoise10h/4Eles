@@ -1,12 +1,26 @@
+<!-- <script>
+        $document.ready(function(){
+          let user_email = getCookie("user_email");
+          $.ajax({
+            type:"POST",
+            url: 'http://localhost:8080/web2/navbar',
+            cache:false,
+            data:{user_email:user_email},
+            success:function(data){
+              
+            }
+          });
+        })
+      </script> -->
 <header class="site-navbar" role="banner">
       <div class="site-navbar-top">
         <div class="container">
           <div class="row align-items-center">
 
             <div class="col-6 col-md-4 order-2 order-md-1 site-search-icon text-left">
-              <form action="" class="site-block-top-search">
+              <form id="searchForm" action="<?php echo URLROOT; ?>/searches/index" class="site-block-top-search">
                 <span class="icon icon-search2"></span>
-                <input type="text" class="form-control border-0" placeholder="Search">
+                <input id="searchInput" type="text" name="search" class="global-search form-control border-0" placeholder="Search">
               </form>
             </div>
 
