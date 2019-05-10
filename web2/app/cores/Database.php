@@ -49,7 +49,7 @@
                     }
                 }
             }
-
+            
             $this->stmt->bindValue($param,$value,$type);
         }
         //Execute prepare statement

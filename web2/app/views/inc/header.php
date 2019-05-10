@@ -23,7 +23,6 @@
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/product-detail.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/core-custom.css">
     
-    
   </head>
   <body>
     <div class="site-wrap">

@@ -21,15 +21,13 @@
                     
                   </div>
                   <div class="btn-group">
-                    <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" id="dropdownMenuReference" data-toggle="dropdown">Reference</button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuReference">
-                      <a class="dropdown-item" href="#">Relevance</a>
-                      <a class="dropdown-item" href="#">Name, A to Z</a>
-                      <a class="dropdown-item" href="#">Name, Z to A</a>
-                      <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="#">Price, low to high</a>
-                      <a class="dropdown-item" href="#">Price, high to low</a>
-                    </div>
+                    <select name="reference-box" id="referenceBox" style="border-radius:3px;padding:6px 8px">
+                      <option value="none">Reference</option>
+                      <option value="nameAtoZ">Name, A to Z</option>
+                      <option value="nameZtoA">Name, Z to A</option>
+                      <option value="priceLowToHigh">Price, Low to High</option>
+                      <option value="priceHighToLow">Price, High to Low</option>
+                    </select>
                   </div>
                 </div>
               </div>
@@ -88,18 +86,20 @@
 
               <div class="mb-4">
                 <h3 class="mb-3 h6 text-uppercase text-black d-block">Filter By Color</h3>
-                <a href="#" class="d-flex color-item align-items-center" >
-                  <span class="bg-danger color d-inline-block rounded-circle mr-2"></span> <span class="text-black">Red (2,429)</span>
-                </a>
-                <a href="#" class="d-flex color-item align-items-center" >
-                  <span class="bg-success color d-inline-block rounded-circle mr-2"></span> <span class="text-black">Green (2,298)</span>
-                </a>
-                <a href="#" class="d-flex color-item align-items-center" >
-                  <span class="bg-info color d-inline-block rounded-circle mr-2"></span> <span class="text-black">Blue (1,075)</span>
-                </a>
-                <a href="#" class="d-flex color-item align-items-center" >
-                  <span class="bg-primary color d-inline-block rounded-circle mr-2"></span> <span class="text-black">Purple (1,075)</span>
-                </a>
+                <select class="select-box" id="colorSelectBox" style="width:100%">
+                  <option value="none">Choose color</option>
+                  <option value="red">Red</option>
+                  <option value="blue">Blue</option>
+                  <option value="green">Green</option>
+                  <option value="yellow">Yellow</option>
+                  <option value="pink">Pink</option>
+                  <option value="orange">Orange</option>
+                  <option value="white">White</option>
+                  <option value="brown">Brown</option>
+                  <option value="grey">Grey</option>
+                  <option value="black">Black</option>
+                  <option value="purple">Purple</option>
+                </select>               
               </div>
 
             </div>

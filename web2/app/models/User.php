@@ -61,5 +61,46 @@
             $row = $this->db->singleResult();
             return $row;
         }
+
+        public function updateUserInfo($email,$firstName,$lastName,$gender,$phone,$address,$birthday){
+            $sex = "";
+            if($gender == "M"){
+                $sex = 1;
+            }else{
+                $sex = 0;
+            }
+
+            $this->db->query("UPDATE users SET firstname = :firstname, lastname = :lastname, phone = :phone, sex = :sex, address = :address, birthday = :birthday WHERE email = :email");
+            $this->db->bind(':firstname',$firstName);
+            $this->db->bind(':lastname',$lastName);
+            $this->db->bind(':phone',$phone);
+            $this->db->bind(':sex',$sex);
+            $this->db->bind(':address',$address);
+            $this->db->bind(':email',$email);
+            $this->db->bind(':birthday',$birthday);
+
+            $this->db->execute();
+        }
+
+        public function updateUserPassword($newPassword,$id){
+            $this->db->query("UPDATE users SET password = :password WHERE id = :id");
+
+            $this->db->bind(':password',$newPassword);
+            $this->db->bind(':id',$id);
+
+            if($this->db->execute()){
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        public function getUserInfoById($id){
+            $this->db->query("SELECT * FROM users WHERE id = :id");
+            $this->db->bind(':id',$id);
+            $row = $this->db->singleResult();
+            
+            return $row;
+        }
     }
 ?>

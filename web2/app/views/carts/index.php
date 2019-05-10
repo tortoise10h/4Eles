@@ -7,12 +7,13 @@
       </div>
     </div>
 
+
     <div class="site-section">
       <div class="container">
         <div class="row mb-5">
           <form class="col-md-12" method="post">
+            <div id="cart-alert"></div>
             <div class="site-blocks-table" id="cartProductTable">
-
             </div>
           </form>
         </div>
@@ -44,7 +45,8 @@
 
                 <div class="row">
                   <div class="col-md-12">
-                    <button class="btn btn-primary btn-lg py-3 btn-block" onclick="window.location='checkout.html'">Proceed To Checkout</button>
+                    <button id="proceedToCheckout" class="btn btn-primary btn-lg py-3 btn-block">Checkout</button>
+                    <!-- <a id="proceedToCheckout" class="btn btn-primary btn-lg py-3 btn-block" href="<?php echo URLROOT; ?>/checkouts/index">Checkout</a> -->
                   </div>
                 </div>
               </div>

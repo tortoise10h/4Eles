@@ -1,17 +1,4 @@
-<!-- <script>
-        $document.ready(function(){
-          let user_email = getCookie("user_email");
-          $.ajax({
-            type:"POST",
-            url: 'http://localhost:8080/web2/navbar',
-            cache:false,
-            data:{user_email:user_email},
-            success:function(data){
-              
-            }
-          });
-        })
-      </script> -->
+
 <header class="site-navbar" role="banner">
       <div class="site-navbar-top">
         <div class="container">
@@ -34,7 +21,7 @@
               <div class="site-top-icons">
                 <ul>
                   <?php if(isset($_SESSION['user_id'])) : ?>
-                    <li id="user-info"><a href="#"><span class="icon icon-person"></span> Hello <?php echo $_SESSION['user_name']; ?></a></li>
+                    <li id="user-info"><a href="<?php echo URLROOT?>/profiles/index"><span class="icon icon-person"></span> Hello <?php echo $_SESSION['user_name']; ?></a></li>
                     <li><a href="<?php echo URLROOT; ?>/users/logout">Log out</a></li>
                   <?php else: ?>
                     <li class="user-form"><button id="loginBtn" type="button" class="btn-link" data-toggle="modal" data-target="#loginForm">
@@ -44,7 +31,6 @@
                     Register
                     </button></li>
                   <?php endif; ?>
-                  <li><a href="#"><span class="icon icon-heart-o"></span></a></li>
                   <li>
                     <a href="<?php echo URLROOT; ?>/carts/index" class="site-cart">
                       <span class="icon icon-shopping_cart"></span>
@@ -183,8 +169,6 @@
               <a href="<?php echo URLROOT ?>/pages/about">About</a>
             </li>
             <li><a href="<?php echo URLROOT; ?>/shops/index">Shop</a></li>
-            <li><a href="#">Catalogue</a></li>
-            <li><a href="#">New Arrivals</a></li>
             <li><a href="<?php echo URLROOT ?>/pages/contact">Contact</a></li>
           </ul>
         </div>

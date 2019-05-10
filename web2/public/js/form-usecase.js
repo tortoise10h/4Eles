@@ -14,7 +14,8 @@ $(document).ready(function(){
         let sexes = $('#register-sex-group input[name="sex"]');
         let address = $('#register-address-group input[name="address"]').val();
         let sex;
-        let is_ok = true;
+        let is_all_field_ok = true;   
+        let is_empty = true;
 
         //GET SEX
         for(let i = 0; i < sexes.length; i++){
@@ -24,46 +25,79 @@ $(document).ready(function(){
         }
 
         //CHECK EMPTY FIELD
-        is_ok = checkEmptyField(firstName,'#register-first-name-group','#register-first-name-err','Please enter your first name');
-        is_ok = checkEmptyField(lastName,'#register-last-name-group','#register-last-name-err','Please enter your last name');
-        is_ok = checkEmptyField(email,'#register-email-group','#register-email-err','Please enter email');
-        is_ok = checkEmptyField(phone,'#register-phone-group','#register-phone-err','Please enter your phone number');
-        is_ok = checkEmptyField(password,'#register-password-group','#register-password-err','Please enter password');
-        is_ok = checkEmptyField(confirmPass,'#register-confirmPass-group','#register-confirmPass-err','Please enter confirm password');
-
-        if(is_ok == true){
+        is_empty = isFieldEmpty(firstName,'#register-first-name-group',
+        '#register-first-name-err','Please enter your first name');
+        if(is_empty == false){
             //validate first name
             if(/^[^\d\[\]`!@#$%^&*()_+\\{}|;':\",./<>?]*$/.test(firstName) == false){
                 alertMessage("#register-first-name-group","#register-first-name-err","Your first name is NOT VALID, we don't allow special characters and digit","alert alert-danger",true);
-                is_ok = false;
+                is_all_field_ok = false;
             }else{
                 alertMessage("#register-first-name-group","#register-first-name-err","",false);
             }
+        }else{
+            is_all_field_ok = false;
+        }
 
+        
+        is_empty = true;
+        is_empty = isFieldEmpty(lastName,'#register-last-name-group','#register-last-name-err','Please enter your last name');
+        if(is_empty == false){
             //validate last name
             if(/^[^\d\[\]`!@#$%^&*()_+\\{}|;':\",./<>?]*$/.test(lastName) == false){
                 alertMessage("#register-last-name-group","#register-last-name-err","Your last name is NOT VALID, we don't allow special characters and digit","alert alert-danger",true);
-                is_ok = false;
+                is_all_field_ok = false;
             }else{
                 alertMessage("#register-last-name-group","#register-last-name-err","",false);
             }
+        }else{
+            is_all_field_ok = false;
+        }
 
+
+        is_empty = isFieldEmpty(email,'#register-email-group','#register-email-err','Please enter email');
+        if(is_empty == false){
             //validate email
             if(/^[a-z][a-z0-9_\.]{5,32}@\D{2,}(\.\D{2,4}){1,2}$/.test(email) == false){
                 alertMessage("#register-email-group","#register-email-err","Your email is NOT VALID","alert alert-danger",true);
-                is_ok = false;
+                is_all_field_ok = false;
             }else{
                 alertMessage("#register-email-group","#register-email-err","",false);
             }
+        }else{
+            is_all_field_ok = false;
+        }
 
+
+        is_empty = isFieldEmpty(phone,'#register-phone-group','#register-phone-err','Please enter your phone number');
+        if(is_empty == false){
+            //validate phone if it is not empty
+            if(/^0[1-9]\d{8}$/.test(phone) == false){
+                alertMessage("#register-phone-group","#register-phone-err","Your phone number is NOT VALID","alert alert-danger",true);
+                is_all_field_ok = false;
+            }else{
+                alertMessage("#register-phone-group","#register-phone-err","",false);
+            }
+        }else{
+            is_all_field_ok = false;
+        }
+
+        is_empty = isFieldEmpty(password,'#register-password-group','#register-password-err','Please enter password');
+        if(is_empty == false){
             //validate password
             if(password.length < 6){
                 alertMessage("#register-password-group","#register-password-err","Your password have to has at least 6 characters","alert alert-danger",true);
-                is_ok = false;
+                is_all_field_ok = false;
             }else{
                 alertMessage("#register-password-group","#register-password-err","",false);
             }
+        }else{
+            is_all_field_ok = false;
+        }
 
+
+        is_empty = isFieldEmpty(confirmPass,'#register-confirmPass-group','#register-confirmPass-err','Please enter confirm password');
+        if(is_empty == false){
             //validate confirm password
             if(confirmPass != password){
                 alertMessage("#register-confirmPass-group","#register-confirmPass-err","Your confirm password does not match your password","alert alert-danger",true);
@@ -71,20 +105,14 @@ $(document).ready(function(){
             }else{
                 alertMessage("#register-confirmPass-group","#register-confirmPass-err","",false);
             }
-
-            //validate phone if it is not empty
-            if(/^0[1-9]\d{8}$/.test(phone) == false){
-                alertMessage("#register-phone-group","#register-phone-err","Your phone number is NOT VALID","alert alert-danger",true);
-                is_ok = false;
-            }else{
-                alertMessage("#register-phone-group","#register-phone-err","",false);
-            }
+        }else{
+            is_all_field_ok = false;
         }
 
-        if(is_ok == true){
+        if(is_all_field_ok == true){
             let formData = "firstname=" + firstName + "&lastname=" + lastName + "&email=" + email + "&password=" + password + "&sex=" + sex + "&phone=" + phone + "&address=" + address;
             $.ajax({
-                url: 'http://localhost:8080/web2/users/register',
+                url: URLROOT + '/users/register',
                 type: 'POST',
                 cache:false,
                 data: formData,
@@ -131,17 +159,24 @@ $(document).ready(function(){
         e.preventDefault();
         let email = $('#login-form input[name="email"]').val();
         let password = $('#login-form input[name="password"]').val();
-        let is_ok = true;
-
+        let is_all_field_ok = true;
+        let is_empty = true;
 
         //VALIDATE EMPTY FIELD
-        is_ok = checkEmptyField(email,'#login-email-group','#login-email-err','Please enter email');
-        is_ok = checkEmptyField(password,'#login-password-group','#login-password-err','Please enter password');
+        is_empty = isFieldEmpty(email,'#login-email-group','#login-email-err','Please enter email');
+        if(is_empty == true){
+            is_all_field_ok = false;
+        }
 
-        if(is_ok == true){
+        is_empty = isFieldEmpty(password,'#login-password-group','#login-password-err','Please enter password');
+        if(is_empty == true){
+            is_all_field_ok = false;
+        }
+
+        if(is_all_field_ok == true){
             let formData = "email=" + email + "&password=" + password;
             $.ajax({
-                url: 'http://localhost:8080/web2/users/login',
+                url: URLROOT + '/users/login',
                 type: 'POST',
                 cache:false,
                 data: formData,
@@ -170,15 +205,15 @@ $(document).ready(function(){
 });
 
 
-function checkEmptyField(fieldCheck,formGroupID,messageBoxID,message){ 
+function isFieldEmpty(fieldCheck,formGroupID,messageBoxID,message,is_focus){ 
     if(fieldCheck == ''){
         $(messageBoxID).html(message);
         $(formGroupID + ' input').addClass('alert alert-danger');
-        return false;
+        return true;
     }else{
         $(messageBoxID).html('');
         $(formGroupID + ' input').removeClass('alert alert-danger');
-        return true; 
+        return false; 
     }
 }
 

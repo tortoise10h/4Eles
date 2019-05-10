@@ -57,9 +57,8 @@
             echo json_encode($result);
         }
 
-        public function showSearchProducts($categoryID,$page = 1,$searchValue){
+        public function showSearchProducts($categoryID,$page = 1,$searchValue,$price,$color,$sort){
             $searchValue = str_replace('--',' ',$searchValue);
-
             // echo "Search value in shops controller: " . $searchValue;
             if($searchValue == 'search-all'){
                 $searchValue = '';
@@ -70,7 +69,7 @@
             //for SELECT statement in Shop model
             $start_from = ($page - 1) * $record_per_page;
             
-            $products = $this->shopModel->getLimitSearchProducts($record_per_page,$start_from,$categoryID,$searchValue);
+            $products = $this->shopModel->getLimitSearchProducts($record_per_page,$start_from,$categoryID,$searchValue,$price,$color,$sort);
             
             // echo $products;
 
@@ -88,7 +87,7 @@
                 ];
             }
             
-            $totalProduct = $this->shopModel->countSearchProduct($categoryID,$searchValue);
+            $totalProduct = $this->shopModel->countSearchProduct($categoryID,$searchValue,$price,$color);
             $totalPages = ceil($totalProduct / $record_per_page);
             
             $result = [

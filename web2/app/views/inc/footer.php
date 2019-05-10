@@ -83,6 +83,7 @@
   <script src="<?php echo URLROOT; ?>/js/owl.carousel.min.js"></script>
   <script src="<?php echo URLROOT; ?>/js/jquery.magnific-popup.min.js"></script>
   <script src="<?php echo URLROOT; ?>/js/aos.js"></script>
+  <script src="<?php echo URLROOT; ?>/js/js_config.js"></script>
 
   <script src="<?php echo URLROOT; ?>/js/cookie_helpers.js"></script>
   <script src="<?php echo URLROOT; ?>/js/main.js"></script>
@@ -91,6 +92,8 @@
   <script src="<?php echo URLROOT; ?>/js/product-detail.js"></script>
   <script src="<?php echo URLROOT; ?>/js/cart.js"></script>
   <script src="<?php echo URLROOT; ?>/js/searches.js"></script>
+  <script src="<?php echo URLROOT; ?>/js/profiles.js"></script>
+  <script src="<?php echo URLROOT; ?>/js/checkout.js"></script>
 
     
   </body>

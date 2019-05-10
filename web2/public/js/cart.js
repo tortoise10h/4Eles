@@ -1,7 +1,6 @@
 $(document).ready(function(){
     let currentLink = window.location.href;
     if(currentLink.split('/')[4] == 'carts'){
-        console.log('That\'s it');
         loadCartProductTable();
 
         //CATCH PLUS AND SUB BUTTON
@@ -38,10 +37,34 @@ $(document).ready(function(){
             }
         });
 
+
+        //CHECK PROCEED TO CHECK OUT BUTTON
+        $("#proceedToCheckout").on('click',function(e){
+            let userID = $("#userID-hidden").val();
+            $.ajax({
+                url: URLROOT + '/carts/checkUserCartEmpty/' + userID,
+                type: 'POST',
+                cache:false,
+                success:function(data){
+                    if(data == 0){
+                        $('#cart-alert').addClass('alert alert-danger p-3');
+                        $('#cart-alert').html("Can't check out when your cart is empty");
+                        window.scroll({
+                            top: 50, 
+                            left: 0, 
+                            behavior: 'smooth'
+                        });
+                    }else{
+                        window.location.href = URLROOT + '/checkouts/index';
+                    }
+                }
+            });
+        })
+
         function loadCartProductTable(){
             //CHECK USER LOGIN
             $.ajax({
-                url: 'http://localhost:8080/web2/users/isLogin',
+                url: URLROOT + '/users/isLogin',
                 type: 'POST',
                 cache:false,
                 success:function(data){
@@ -59,7 +82,7 @@ $(document).ready(function(){
         
         function getUserCartProduct(userID){
             $.ajax({
-                url: 'http://localhost:8080/web2/carts/getUserCartProduct/' + userID,
+                url: URLROOT + '/carts/getUserCartProduct/' + userID,
                 type: 'POST',
                 cache:false,
                 success:function(data){
@@ -92,7 +115,7 @@ $(document).ready(function(){
                 // let total = 
                 text += '<tr>'+
                             '<td class="product-thumbnail">' +
-                                '<img src="http://localhost:8080/web2' + product.imgLink + '/' + product.id + '_1.jpg"' + ' alt="Image" class="img-fluid">' +
+                                '<img src="' + URLROOT + product.imgLink + '/' + product.id + '_1.jpg"' + ' alt="Image" class="img-fluid">' +
                             '</td>' +
                             '<td class="product-name" style="max-width:235px">' +
                                 '<h2 class="h5 text-black">' + product.name + '</h2>' +
@@ -135,7 +158,7 @@ $(document).ready(function(){
         
         function changeCartProductQuantity(productID,userID,operation){
             $.ajax({
-                url: 'http://localhost:8080/web2/carts/changeProductQuantity/' + productID + "/" + userID + "/" + operation,
+                url: URLROOT + '/carts/changeProductQuantity/' + productID + "/" + userID + "/" + operation,
                 type: 'POST',
                 cache:false,
                 success:function(data){
@@ -169,7 +192,7 @@ $(document).ready(function(){
             //     }
             // });
             $.ajax({
-                url: 'http://localhost:8080/web2/carts/removeCartProduct/' + productID + "/" + userID,
+                url: URLROOT + '/carts/removeCartProduct/' + productID + "/" + userID,
                 type: 'POST',
                 cache:false,
                 success:function(data){

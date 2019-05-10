@@ -89,5 +89,28 @@
                 $_SESSION['cart-product'] = $cartProducts;
             }
         }
+
+        public function checkUserCartEmpty($userId){
+            $cartProducts = [];
+            if(isset($_SESSION['cart-product'])){
+                $cartProducts = $_SESSION['cart-product'];
+            
+                $userCartProducts = [];
+
+                foreach($cartProducts as $product){
+                    if($product['userID'] == $userId){
+                        $userCartProducts[] = $product;
+                    }
+                }
+            
+                if(count($userCartProducts) > 0){
+                    echo 1;
+                }else{
+                    echo 0;
+                }
+            }else{
+                echo 0;
+            }
+        }
     }
 ?>

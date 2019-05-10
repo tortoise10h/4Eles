@@ -60,30 +60,80 @@
             return $products;
         }
 
-        public function getLimitSearchProducts($record_per_page,$start_from,$categoryID,$searchValue){
-            // return $searchValue;
-            $query = '';
-            if($categoryID == 'all'){
-                $query .= "SELECT * FROM products ";
-            }else{
-                $query .= "SELECT * FROM products WHERE categoryID = :categoryID ";
+        public function getLimitSearchProducts($record_per_page,$start_from,$categoryID,$searchValue,$price,$color,$sort){
+            //CREATE QUERY
+            //split price variable to get from price and to price
+            $price = explode('--',$price);
+
+            $query = 'SELECT * FROM products WHERE status = :status';
+
+            
+            //category handle
+            if($categoryID != 'all'){
+                $query .= " AND categoryID = :categoryID ";
             }
             
-            if($searchValue != '' && $categoryID != 'all'){
+            //price handle
+            if($price[0] != '@none@' && $price[1] != '@none@'){
+                $query .= " AND price >= :fromprice AND price <= :toprice";
+            }elseif($price[0] == '@none@' && $price[1] != '@none@'){
+                $query .= " AND price <= :toprice";
+            }elseif($price[0] != '@none@' && $price[1] == '@none@'){
+                $query .= " AND price >= :fromprice";
+            }
+            
+            //color handle
+            if($color != 'none'){
+                $query .= " AND color = :color";
+            }
+            
+            //search value handle
+            if($searchValue != ''){
                 $query .= " AND name LIKE '%$searchValue%'"; 
-            }elseif($searchValue != '' && $categoryID == 'all'){
-                $query .= "WHERE name LIKE '%$searchValue%'";
+            }
+            
+            //sort handle
+            if($sort == 'none'){
+                $query .= " ORDER BY created_at DESC LIMIT $start_from,$record_per_page";
+            }elseif($sort == 'priceLowToHigh'){
+                $query .= " ORDER BY price ASC LIMIT $start_from,$record_per_page";
+            }elseif($sort == 'priceHighToLow'){
+                $query .= " ORDER BY price DESC LIMIT $start_from,$record_per_page";
+            }elseif($sort == 'nameAtoZ'){
+                $query .= " ORDER BY name ASC LIMIT $start_from,$record_per_page";
+            }elseif($sort == 'nameZtoA'){
+                $query .= " ORDER BY name DESC LIMIT $start_from,$record_per_page";
             }
 
-            $query .= " ORDER BY created_at DESC LIMIT $start_from,$record_per_page";
+            
+            //BIND VALUE TO QUERY
 
-            // return $query;
+            // prepare query with prepare statement
             $this->db->query($query);
+
+            $this->db->bind(':status',true);
 
             if($categoryID != 'all'){
                 $this->db->bind(':categoryID',$categoryID);
             }
 
+            if($price[0] != '@none@' && $price[1] != '@none@'){
+                $fromPrice = (int) $price[0];
+                $toPrice = (int) $price[1];
+                $this->db->bind(':fromprice',$fromPrice);
+                $this->db->bind(':toprice',$toPrice);
+            }elseif($price[0] == '@none@' && $price[1] != '@none@'){
+                $toPrice = (int) $price[1];
+                $this->db->bind(':toprice',$toPrice);
+            }elseif($price[0] != '@none@' && $price[1] == '@none@'){
+                $fromPrice = (int) $price[0];
+                $this->db->bind(':fromprice',$fromPrice);
+            }
+
+            if($color != 'none'){
+                $this->db->bind(':color',$color);
+            }
+            
             $products = $this->db->resultSet();
             return $products;
         }
@@ -100,24 +150,58 @@
             return $numOfProduct;
         }
 
-        public function countSearchProduct($categoryID,$searchValue){
-            $query = '';
-            if($categoryID == 'all'){
-                $query .= "SELECT * FROM products ";
-            }else{
-                $query .= "SELECT * FROM products WHERE categoryID = :categoryID ";
+        public function countSearchProduct($categoryID,$searchValue,$price,$color){
+            // return $searchValue;
+            $price = explode('--',$price);
+
+            $query = 'SELECT * FROM products WHERE status = :status';
+            if($categoryID != 'all'){
+                $query .= " AND categoryID = :categoryID ";
+            }
+            
+
+            if($price[0] != '@none@' && $price[1] != '@none@'){
+                $query .= " AND price >= :fromprice AND price <= :toprice";
+            }elseif($price[0] == '@none@' && $price[1] != '@none@'){
+                $query .= " AND price <= :toprice";
+            }elseif($price[0] != '@none@' && $price[1] == '@none@'){
+                $query .= " AND price >= :fromprice";
             }
 
-            if($searchValue != '' && $categoryID != 'all'){
+            if($color != 'none'){
+                $query .= " AND color = :color";
+            }
+
+            if($searchValue != ''){
                 $query .= " AND name LIKE '%$searchValue%'"; 
-            }elseif($searchValue != '' && $categoryID == 'all'){
-                $query .= "WHERE name LIKE '%$searchValue%'";
             }
 
             $query .= " ORDER BY created_at DESC";
+
+            // return $query;
             $this->db->query($query);
+
+            $this->db->bind(':status',true);
+
             if($categoryID != 'all'){
                 $this->db->bind(':categoryID',$categoryID);
+            }
+
+            if($price[0] != '@none@' && $price[1] != '@none@'){
+                $fromPrice = (int) $price[0];
+                $toPrice = (int) $price[1];
+                $this->db->bind(':fromprice',$fromPrice);
+                $this->db->bind(':toprice',$toPrice);
+            }elseif($price[0] == '@none@' && $price[1] != '@none@'){
+                $toPrice = (int) $price[1];
+                $this->db->bind(':toprice',$toPrice);
+            }elseif($price[0] != '@none@' && $price[1] == '@none@'){
+                $fromPrice = (int) $price[0];
+                $this->db->bind(':fromprice',$fromPrice);
+            }
+
+            if($color != 'none'){
+                $this->db->bind(':color',$color);
             }
 
             $products = $this->db->resultSet();

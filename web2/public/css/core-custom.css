@@ -64,6 +64,10 @@ html{
 .pagination-search-btn:last-child{
     margin-right:3px;
 }
+.pagination-search-active{
+    background:#7971ea;
+    color:#fff;
+}
 
 
 /*FOR SHOP PAGE*/
@@ -126,3 +130,148 @@ html{
     90% {width:26px;height:26px;}
     100% {width:24px;height:24px;}
 }
+
+
+.color-btn{
+    border-radius:6px;
+    padding:2px 5px;
+    border:none;
+    width:100%;
+    margin-bottom:15px;
+    color:#f4f4f4;
+    outline:none;
+    transition:0.3s;
+}
+
+.color-btn:active{
+    transform:translate(5px,0);
+}
+
+.select-box{
+    border-radius:3px;
+    border:1px solid #ced4da;
+    color:#7a7c7e;
+    padding:8px 10px;
+    outline:none;
+}
+
+ /*payment-page*/
+ .panel-title {display: inline;font-weight: bold;}
+ .checkbox.pull-right { margin: 0; }
+ .pl-ziro { padding-left: 0px; }
+ 
+ 
+ 
+ .one-card > div {
+   height: 150px;
+   background-position: center center;
+   background-repeat: no-repeat;
+ }
+ .visa-mc-cvc-preview {
+   background-image:url(../images/payment_page/securitycode.jpg);
+ 
+ }
+ 
+ 
+ .span_pseudo, .chiller_cb span:before, .chiller_cb span:after {
+   content: "";
+   display: inline-block;
+   background: #fff;
+   width: 0;
+   height: 0.2rem;
+   position: absolute;
+   transform-origin: 0% 0%;
+ }
+ 
+ .chiller_cb {
+   position: relative;
+   height: 2rem;
+   display: flex;
+   align-items: center;
+ }
+ .chiller_cb input {
+   display: none;
+ }
+ .chiller_cb input:checked ~ span {
+   background: #7971ea;
+   border-color: #7971ea;
+ }
+ .chiller_cb input:checked ~ span:before {
+   width: 1rem;
+   height: 0.15rem;
+   transition: width 0.1s;
+   transition-delay: 0.3s;
+ }
+ .chiller_cb input:checked ~ span:after {
+   width: 0.4rem;
+   height: 0.15rem;
+   transition: width 0.1s;
+   transition-delay: 0.2s;
+ }
+ 
+ .chiller_cb label {
+   padding-left: 2rem;
+   position: relative;
+   z-index: 2;
+   cursor: pointer;
+   margin-bottom:0;
+ }
+ .chiller_cb span {
+   display: inline-block;
+   width: 1.2rem;
+   height: 1.2rem;
+   border: 2px solid #ccc;
+   position: absolute;
+   left: 0;
+   transition: all 0.2s;
+   z-index: 1;
+   box-sizing: content-box;
+ }
+ .chiller_cb span:before {
+   transform: rotate(-55deg);
+   top: 1rem;
+   left: 0.37rem;
+ }
+ .chiller_cb span:after {
+   transform: rotate(35deg);
+   bottom: 0.35rem;
+   left: 0.2rem;
+ }
+ 
+ .cc-selector input{
+   margin:0;padding:0;
+   -webkit-appearance:none;
+      -moz-appearance:none;
+           appearance:none;
+ }
+ .agribank{background-image:url(../images/banks-images/agribank.jpg);}
+ .acb{background-image:url(../images/banks-images/acb.jpg);}
+ .techcombank{background-image:url(../images/banks-images/techcombank.jpg);}
+ .vietinbank{background-image:url(../images/banks-images/vietinbank.jpg);}
+ .oceanbank{background-image:url(../images/banks-images/oceanbank.jpg);}
+ 
+ .cc-selector input:active +.drinkcard-cc{opacity: .9;}
+ .cc-selector input:checked +.drinkcard-cc{
+   -webkit-filter: none;
+      -moz-filter: none;
+           filter: none;
+ }
+ .drinkcard-cc{
+   cursor:pointer;
+   background-size:contain;
+   background-repeat:no-repeat;
+   display:inline-block;
+   width:150px;
+   height:120px;
+   -webkit-transition: all 100ms ease-in;
+      -moz-transition: all 100ms ease-in;
+           transition: all 100ms ease-in;
+   -webkit-filter: brightness(1.8) grayscale(1) opacity(.7);
+      -moz-filter: brightness(1.8) grayscale(1) opacity(.7);
+           filter: brightness(1.8) grayscale(1) opacity(.7);
+ }
+ .drinkcard-cc:hover{
+   -webkit-filter: brightness(1.2) grayscale(.5) opacity(.9);
+      -moz-filter: brightness(1.2) grayscale(.5) opacity(.9);
+           filter: brightness(1.2) grayscale(.5) opacity(.9);
+ }
