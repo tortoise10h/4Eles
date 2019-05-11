@@ -16,6 +16,7 @@ $(document).ready(function(){
         let sex;
         let is_all_field_ok = true;   
         let is_empty = true;
+        let is_focus = true;
 
         //GET SEX
         for(let i = 0; i < sexes.length; i++){
@@ -26,87 +27,99 @@ $(document).ready(function(){
 
         //CHECK EMPTY FIELD
         is_empty = isFieldEmpty(firstName,'#register-first-name-group',
-        '#register-first-name-err','Please enter your first name');
+        '#register-first-name-err','Please enter your first name',is_focus);
         if(is_empty == false){
             //validate first name
             if(/^[^\d\[\]`!@#$%^&*()_+\\{}|;':\",./<>?]*$/.test(firstName) == false){
-                alertMessage("#register-first-name-group","#register-first-name-err","Your first name is NOT VALID, we don't allow special characters and digit","alert alert-danger",true);
+                alertMessage("#register-first-name-group","#register-first-name-err","Your first name is NOT VALID, we don't allow special characters and digit","alert alert-danger",true,is_focus);
                 is_all_field_ok = false;
+                is_focus = false;
             }else{
                 alertMessage("#register-first-name-group","#register-first-name-err","",false);
             }
         }else{
             is_all_field_ok = false;
+            is_focus = false;
         }
 
         
         is_empty = true;
-        is_empty = isFieldEmpty(lastName,'#register-last-name-group','#register-last-name-err','Please enter your last name');
+        is_empty = isFieldEmpty(lastName,'#register-last-name-group','#register-last-name-err','Please enter your last name',is_focus);
         if(is_empty == false){
             //validate last name
             if(/^[^\d\[\]`!@#$%^&*()_+\\{}|;':\",./<>?]*$/.test(lastName) == false){
-                alertMessage("#register-last-name-group","#register-last-name-err","Your last name is NOT VALID, we don't allow special characters and digit","alert alert-danger",true);
+                alertMessage("#register-last-name-group","#register-last-name-err","Your last name is NOT VALID, we don't allow special characters and digit","alert alert-danger",true,is_focus);
                 is_all_field_ok = false;
+                is_focus = false;
             }else{
                 alertMessage("#register-last-name-group","#register-last-name-err","",false);
             }
         }else{
             is_all_field_ok = false;
+            is_focus = false;
         }
 
 
-        is_empty = isFieldEmpty(email,'#register-email-group','#register-email-err','Please enter email');
+        is_empty = isFieldEmpty(email,'#register-email-group','#register-email-err','Please enter email',is_focus);
         if(is_empty == false){
             //validate email
             if(/^[a-z][a-z0-9_\.]{5,32}@\D{2,}(\.\D{2,4}){1,2}$/.test(email) == false){
-                alertMessage("#register-email-group","#register-email-err","Your email is NOT VALID","alert alert-danger",true);
+                alertMessage("#register-email-group","#register-email-err","Your email is NOT VALID","alert alert-danger",true,is_focus);
                 is_all_field_ok = false;
+                is_focus = false;
             }else{
                 alertMessage("#register-email-group","#register-email-err","",false);
             }
         }else{
             is_all_field_ok = false;
+            is_focus = false;
         }
 
 
-        is_empty = isFieldEmpty(phone,'#register-phone-group','#register-phone-err','Please enter your phone number');
+        is_empty = isFieldEmpty(phone,'#register-phone-group','#register-phone-err','Please enter your phone number',is_focus);
         if(is_empty == false){
             //validate phone if it is not empty
             if(/^0[1-9]\d{8}$/.test(phone) == false){
-                alertMessage("#register-phone-group","#register-phone-err","Your phone number is NOT VALID","alert alert-danger",true);
+                alertMessage("#register-phone-group","#register-phone-err","Your phone number is NOT VALID","alert alert-danger",true,is_focus);
                 is_all_field_ok = false;
+                is_focus = false;
             }else{
                 alertMessage("#register-phone-group","#register-phone-err","",false);
             }
         }else{
             is_all_field_ok = false;
+            is_focus = false;
         }
 
-        is_empty = isFieldEmpty(password,'#register-password-group','#register-password-err','Please enter password');
+        is_empty = isFieldEmpty(password,'#register-password-group','#register-password-err','Please enter password',is_focus);
         if(is_empty == false){
             //validate password
             if(password.length < 6){
-                alertMessage("#register-password-group","#register-password-err","Your password have to has at least 6 characters","alert alert-danger",true);
+                alertMessage("#register-password-group","#register-password-err","Your password have to has at least 6 characters","alert alert-danger",true,is_focus);
                 is_all_field_ok = false;
+                is_focus = false;
             }else{
                 alertMessage("#register-password-group","#register-password-err","",false);
             }
         }else{
             is_all_field_ok = false;
+            is_focus = false;
         }
 
 
-        is_empty = isFieldEmpty(confirmPass,'#register-confirmPass-group','#register-confirmPass-err','Please enter confirm password');
+        is_empty = isFieldEmpty(confirmPass,'#register-confirmPass-group','#register-confirmPass-err','Please enter confirm password',is_focus);
         if(is_empty == false){
             //validate confirm password
             if(confirmPass != password){
-                alertMessage("#register-confirmPass-group","#register-confirmPass-err","Your confirm password does not match your password","alert alert-danger",true);
-                is_ok = false;
+                alertMessage("#register-confirmPass-group","#register-confirmPass-err","Your confirm password does not match your password","alert alert-danger",true,is_focus);
+                is_all_field_ok = false;
+                is_focus = false;
             }else{
                 alertMessage("#register-confirmPass-group","#register-confirmPass-err","",false);
             }
         }else{
             is_all_field_ok = false;
+            is_focus = false;
         }
 
         if(is_all_field_ok == true){
@@ -209,6 +222,9 @@ function isFieldEmpty(fieldCheck,formGroupID,messageBoxID,message,is_focus){
     if(fieldCheck == ''){
         $(messageBoxID).html(message);
         $(formGroupID + ' input').addClass('alert alert-danger');
+        if(is_focus == true){
+            $(formGroupID + ' input').focus();
+        }
         return true;
     }else{
         $(messageBoxID).html('');
@@ -217,10 +233,13 @@ function isFieldEmpty(fieldCheck,formGroupID,messageBoxID,message,is_focus){
     }
 }
 
-function alertMessage(formGroupID,messageBoxID,message,classesName,is_alert){
+function alertMessage(formGroupID,messageBoxID,message,classesName,is_alert,is_focus){
     if(is_alert == true){
         $(messageBoxID).html(message);
         $(formGroupID + ' input').addClass(classesName);
+        if(is_focus == true){
+            $(formGroupID + ' input').focus();
+        }
     }else{
         $(messageBoxID).html('');
         $(formGroupID + ' input').removeClass(classesName);

@@ -21,10 +21,12 @@
                 <div class="col-md-6">
                   <label for="firstname_txt" class="text-black">First Name <span class="text-danger">*</span></label>
                   <input type="text" class="form-control" id="firstName" name="firstname_txt" value="<?php echo $data['currentUser']['firstname']; ?>">
+                  <div id="first-name-alert" style="color:red"></div>
                 </div>
                 <div class="col-md-6">
                   <label for="lastname_txt" class="text-black">Last Name <span class="text-danger">*</span></label>
                   <input type="text" class="form-control" id="lastName" name="lastname_txt" value="<?php echo $data['currentUser']['lastname']; ?>">
+                  <div id="last-name-alert" style="color:red"></div>
                 </div>
               </div>
 
@@ -32,6 +34,7 @@
                 <div class="col-md-12">
                   <label for="email_txt" class="text-black">Email</label>
                   <input type="text" class="form-control" id="email" name="email_txt" readonly value="<?php echo $data['currentUser']['email']; ?>">
+                  <div id="email-alert" style="color:red"></div>
                 </div>
               </div>
 
@@ -39,12 +42,14 @@
                 <div class="col-md-12">
                   <label for="address_txt" class="text-black">Address <span class="text-danger">*</span></label>
                   <input type="text" class="form-control" id="address" name="address_txt" placeholder="Address" value="<?php echo $data['currentUser']['address']; ?>">
+                  <div id="address-alert" style="color:red"></div>
                 </div>
               </div>
 
               <div class="form-group mb-5">
                 <label for="phone_txt" class="text-black">Phone <span class="text-danger">*</span></label>
                 <input type="text" class="form-control" id="phone" name="phone_txt" placeholder="Phone Number" value="<?php echo $data['currentUser']['phone']; ?>">
+                <div id="phone-alert" style="color:red"></div>
               </div>
 
             </div>
@@ -81,7 +86,7 @@
                   </table>
 
                   <div class="form-group">
-                    <a class="btn btn-primary btn-lg py-3 btn-block" href="<?php echo URLROOT; ?>/checkouts/payment">Move to payment</a>
+                    <a class="btn btn-primary btn-lg py-3 btn-block" href="<?php echo URLROOT; ?>/checkouts/payment" id="moveToPayment">Move to payment</a>
                   </div>
 
                 </div>
