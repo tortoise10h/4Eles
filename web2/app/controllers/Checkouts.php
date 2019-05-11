@@ -4,6 +4,7 @@
             $this->checkoutModel = $this->model('Checkout');
             $this->userModel = $this->model('User');
             $this->cartModel = $this->model('Cart');
+            $this->billModel = $this->model('Bill');
         }
 
         public function index(){
@@ -22,13 +23,20 @@
             }
         }
 
-        public function payment(){
+        public function payment($firstName,$lastName,$address,$phone){
+            $placeOrderInfo = [
+                'firstName' => $firstName,
+                'lastName' => $lastName,
+                'address' => $address,
+                'phone' => $phone
+            ];
             $currentUser = $this->getCurrentUserAndParseToAssocArr();
             $currentUserCartProducts = $this->getCurrentUserCartProducts($currentUser['id']);
             if($this->checkUserCartEmpty($currentUser['id'])){
                 $result = [
                     'currentUser' => $currentUser,
-                    'currentUserCartProducts' => $currentUserCartProducts
+                    'currentUserCartProducts' => $currentUserCartProducts,
+                    'placeOrderInfo' => $placeOrderInfo
                 ];
                 $this->view('checkouts/payment',$result);
             }else{
@@ -36,8 +44,11 @@
             }
         }
 
-        public function thankyou(){
-            $this->view('checkouts/thankyou');
+        public function thankyou($paymentName){
+            $result = [
+                'paymentName' => $paymentName
+            ];
+            $this->view('checkouts/thankyou',$result);
         }
 
         public function getCurrentUserAndParseToAssocArr(){
@@ -111,5 +122,63 @@
                 return false;
             }
         }
+
+        public function saveBill($userID,$billID){
+            $currentUser = $this->getCurrentUserAndParseToAssocArr();
+            $currentUserCartProducts = $this->getCurrentUserCartProducts($userID);
+            
+            $totalPrice = 0;
+            foreach($currentUserCartProducts as $product){
+                $totalPrice += ((int)$product['quantity'] * (int)$product['price']);
+            }
+
+            $bill = [
+                'billID' => $billID,
+                'customerID' => $userID,
+                'totalPrice' => $totalPrice
+            ];
+
+            $billDetailList = $this->createBillDetaiList($userID,$billID);
+
+            $this->billModel->saveBill($bill);
+            $this->billModel->saveBillDetail($billDetailList);
+
+            $this->deleteUserCartProducts($userID);
+
+        }
+
+        public function createBillDetaiList($userID,$billID){
+            $currentUserCartProducts = $this->getCurrentUserCartProducts($userID);
+            $billDetailList = [];
+            
+            foreach($currentUserCartProducts as $product){
+                $billDetail = [
+                    'billID' => $billID,
+                    'productID' => $product['id'],
+                    'quantity' => $product['quantity'],
+                    'totalPrice' => ((int)$product['quantity'] * (int)$product['price'])
+                ];
+
+                $billDetailList[] = $billDetail;
+            }
+
+            return $billDetailList;
+        }
+
+        public function deleteUserCartProducts($userID){
+            $cartProducts = [];
+            if(!empty($_SESSION['cart-product'])){
+                $cartProducts = $_SESSION['cart-product'];
+                $cartProductsLength = count($cartProducts);
+                for($i = 0; $i < $cartProductsLength; $i++){
+                    if($cartProducts[$i]['userID'] == $userID){
+                        unset($cartProducts[$i]);
+                    }
+                }
+                $cartProducts = array_values($cartProducts);
+                $_SESSION['cart-product'] = $cartProducts;
+            }
+        }
+
     }
 ?>

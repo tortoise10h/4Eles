@@ -3,7 +3,7 @@
 
         <div class="site-section">
         <div class="container">
-
+            <input type="hidden" id="userID" value="<?php echo $data['currentUser']['id'] ?>">
             <div class="row mb-5">
 
             <div class="col-md-12 order-1 mb-5 mb-md-0">

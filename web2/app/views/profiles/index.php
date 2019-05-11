@@ -4,7 +4,6 @@
 
         <div class="site-section">
         <div class="container">
-
             <div class="row mb-5">
             <div class="col-md-9 order-2">
 
@@ -19,12 +18,12 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <label for="username_txt" class="control-label requiredField">First name<span class="asteriskField">*</span> </label>
-                                            <input class="input-md  textinput textInput form-control" id="firstname_txt" maxlength="30" name="first_name" placeholder="Your first name" style="margin-bottom: 10px" type="text" value="<?php echo $data['firstname'] ?>">  
+                                            <input class="input-md  textinput textInput form-control" id="firstname_txt" maxlength="30" name="first_name" placeholder="Your first name" style="margin-bottom: 10px" type="text" value="<?php echo $data['currentUser']['firstname'] ?>">  
                                             <div id="firstname-alert" style="color:red"></div>
                                         </div>
                                         <div class="col-md-6">
                                             <label for="username_txt" class="control-label requiredField">Last name<span class="asteriskField">*</span> </label>
-                                            <input class="input-md  textinput textInput form-control" id="lastname_txt" maxlength="30" name="last_name" placeholder="Your last name" style="margin-bottom: 10px" type="text" value="<?php echo $data['lastname'] ?>">  
+                                            <input class="input-md  textinput textInput form-control" id="lastname_txt" maxlength="30" name="last_name" placeholder="Your last name" style="margin-bottom: 10px" type="text" value="<?php echo $data['currentUser']['lastname'] ?>">  
                                             <div id="lastname-alert" style="color:red"></div>
                                         </div>
 
@@ -35,34 +34,34 @@
                             <div id="div_email" class="form-group required">
                                 <label for="email_txt" class="control-label col-md-4  requiredField"> E-mail<span class="asteriskField">*</span> </label>
                                 <div class="controls col-md-8 ">
-                                    <input class="input-md emailinput form-control" id="email_txt" name="user_email" placeholder="Your current email address" style="margin-bottom: 10px" type="email" value="<?php echo $data['email']; ?>" readonly>
+                                    <input class="input-md emailinput form-control" id="email_txt" name="user_email" placeholder="Your current email address" style="margin-bottom: 10px" type="email" value="<?php echo $data['currentUser']['email']; ?>" readonly>
                                 </div>     
                             </div>
                             <div id="div_phonenum" class="form-group required">
                                 <label for="phonenum_txt" class="control-label col-md-4  requiredField"> Phone number<span class="asteriskField">*</span> </label>
                                 <div class="controls col-md-8 ">
-                                    <input class="input-md emailinput form-control" id="phonenum_txt" name="user_phonenum" placeholder="Your current phone number" style="margin-bottom: 10px" type="text" value="<?php echo $data['phone']; ?>">
+                                    <input class="input-md emailinput form-control" id="phonenum_txt" name="user_phonenum" placeholder="Your current phone number" style="margin-bottom: 10px" type="text" value="<?php echo $data['currentUser']['phone']; ?>">
                                     <div id="phonenum-alert" style="color:red"></div>
                                 </div>     
                             </div>
                             <div id="div_gender" class="form-group required">
                                 <label for="gender"  class="control-label col-md-4  requiredField"> Gender<span class="asteriskField">*</span> </label>
                                 <div class="controls col-md-8 "  style="margin-bottom: 10px">
-                                    <label class="radio-inline"> <input type="radio" name="gender" id="user_gender_1" value="M"  style="margin: 10px" <?php if($data['sex'] == 1) : ?><?php echo "checked"; ?><?php endif; ?>>Male</label>
-                                    <label class="radio-inline"> <input type="radio" name="gender" id="user_gender_2" value="F"  style="margin: 10px" <?php if($data['sex'] == 0) : ?><?php echo "checked"; ?><?php endif; ?>>Female </label>
+                                    <label class="radio-inline"> <input type="radio" name="gender" id="user_gender_1" value="M"  style="margin: 10px" <?php if($data['currentUser']['sex'] == 1) : ?><?php echo "checked"; ?><?php endif; ?>>Male</label>
+                                    <label class="radio-inline"> <input type="radio" name="gender" id="user_gender_2" value="F"  style="margin: 10px" <?php if($data['currentUser']['sex'] == 0) : ?><?php echo "checked"; ?><?php endif; ?>>Female </label>
                                 </div>
                             </div>
                             <div id="div_birthday" class="form-group required">
                                 <label for="" class="control-label col-md-4  requiredField"> Your Birthday (mm/dd/yyyy) </label>
                                 <div class="controls col-md-8 ">
-                                    <input style="margin-bottom: 10px" type="date" class="form-control" id="birthday_txt" name="birthday" value="<?php echo $data['birthday']; ?>">
+                                    <input style="margin-bottom: 10px" type="date" class="form-control" id="birthday_txt" name="birthday" value="<?php echo $data['currentUser']['birthday']; ?>">
                                     <div id="birthday-alert" style="color:red"></div>
                                 </div> 
                             </div>
                             <div id="div_address" class="form-group required">
                                 <label for="adress_txt" class="control-label col-md-4  requiredField"> Your Address<span class="asteriskField">*</span> </label>
                                 <div class="controls col-md-8 ">
-                                    <input class="input-md textinput textInput form-control" id="address_txt" name="address" placeholder="Your current address" style="margin-bottom: 10px" type="text" value="<?php echo $data['address']; ?>">
+                                    <input class="input-md textinput textInput form-control" id="address_txt" name="address" placeholder="Your current address" style="margin-bottom: 10px" type="text" value="<?php echo $data['currentUser']['address']; ?>">
                                 </div> 
                             </div>
                             
@@ -117,32 +116,36 @@
             <div class="container" id="user_order" style="display:none">    
                 <div class="panel-body">
                 <div class="container">          
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th>Item</th>
-                            <th>Quantity</th> 
-                            <th>Unit price</th>
-                            <th>Sub total</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>shirt</td>
-                            <td>1</td>
-                            <td>10$</td>
-                            <td>10$</td>
-                        </tr>     
-                        </tbody>
-                        <tfoot>
-                        <tr>
-                            <th>Purchase Date: <span id="pur_date"></span></th>
-                            <th>Status:<span id="status"></span></th> 
-                            <th>Total:</th>
-                            <th><span id="total"></span></th>
-                        </tr>
-                        </tfoot>
-                    </table>
+                    <?php foreach($data['bills'] as $bill) : ?>
+                        <div class="py-3 px-1 mb-5 shadow-sm" style="background:#fff;border-radius:5px">
+                            <h3>Bill ID: <span style="font-weight:10" class="text-primary"><?php echo $bill['billID']; ?></span></h3>
+                            <table class="table p-3">
+                                <thead>
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Quantity</th> 
+                                    <th>Price</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php foreach($bill['billDetails'] as $billDetail) : ?>
+                                    <tr>
+                                        <td><?php echo $billDetail['productName']; ?></td>
+                                        <td><?php echo $billDetail['quantity']; ?></td>
+                                        <td><?php echo $billDetail['totalPrice']; ?></td>
+                                    </tr>
+                                <?php endforeach; ?>     
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <th>Purchase Date: <span id="pur_date" style="font-weight:10"><?php echo $bill['purchaseDate']; ?></span></th>
+                                    <th>Status: <span id="status" style="font-weight:10"><?php echo $bill['processStatus']; ?></span></th> 
+                                    <th>Total: <span id="totalPrice" style="font-weight:10">$<?php echo $bill['totalPrice']; ?></span></th>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    <?php endforeach; ?>
                 </div>
                 </div>
             </div>
@@ -174,17 +177,6 @@
             </div>
 
             <div class="col-md-3 order-1 mb-5 mb-md-0">
-                <!-- <div style="width:100%;height:250px;background:#f0f0f0;border:1px solid black;border-radius:50%" class="mb-5">
-                    <img style="width:100%;height:250px;border-radius:50%" src="<?php echo URLROOT?><?php echo $data['imgLink'];?>" alt="">
-                </div>
-                <div class="container mb-4">
-                    <form action="<?php echo APPROOT;?>/profiles/changeUserImage" method="POST" enctype="multipart/form-data">
-                        <div class="form-group">
-                            <input class="form-control-file" type="file" name="file">
-                        </div>
-                        <input class="btn btn-default text-white" style="background:#17a2b8" type="submit" name="submit" value="Upload file">
-                    </form>
-                </div> -->
                 <div class="border p-4 rounded mb-4">
                     <h3 class="mb-3 h6 text-uppercase text-black d-block">MY PROFILE</h3>
                     <ul class="list-unstyled mb-0">

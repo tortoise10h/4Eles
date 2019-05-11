@@ -14,7 +14,7 @@
             <span class="icon-check_circle display-3 text-success"></span>
             <h2 class="display-3 text-black">Thank you!</h2>
             <p class="lead">You order was successfuly completed.</p>
-            <p class="lead mb-5 text-primary " id="paymentDisplay"></p>
+            <p class="lead mb-5 text-primary ">You chose <?php echo $data['paymentName']; ?> for your payment</p>
             <p><a href="<?php echo URLROOT; ?>/shops/index" class="btn btn-sm btn-primary">Back to shop</a></p>
           </div>
         </div>

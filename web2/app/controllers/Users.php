@@ -93,11 +93,13 @@
             $_SESSION['user_id'] = $user->id;
             $_SESSION['user_email'] = $user->email;
             $_SESSION['user_name'] = $user->firstname;
+            $_SESSION['user_role'] = $user->roleID;
         }
         public function logout(){
             unset($_SESSION['user_id']);
             unset($_SESSION['user_email']);
             unset($_SESSION['user_name']);
+            unset($_SESSION['user_role']);
             header('Location: ' . URLROOT . '/pages/index');
         }
         public function isLogin(){

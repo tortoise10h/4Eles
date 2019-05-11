@@ -1,7 +1,10 @@
 $(document).ready(function(){
     let currentLink = window.location.href;
+
+    /***FOR CHECKOUT INDEX PAGE***/
     if(currentLink.split('/')[4] == 'checkouts' && currentLink.split('/')[5] == 'index'){
         $('#moveToPayment').on('click',function(e){
+            e.preventDefault();
             let firstName = $('#firstName').val();
             let lastName = $('#lastName').val();
             let address = $('#address').val();
@@ -9,6 +12,7 @@ $(document).ready(function(){
 
             let is_empty = true;
             let is_focus = true;
+            let is_all_field_ok = true;
 
 
             //check first name
@@ -19,13 +23,13 @@ $(document).ready(function(){
                 if(/^[^\d\[\]`!@#$%^&*()_+\\{}|;':\",./<>?]*$/.test(firstName) == false){
                     alertMessage("#firstName","#first-name-alert","Your first name is NOT VALID, we don't allow special characters and digit","alert alert-danger",true,is_focus);
                     is_focus = false;
-                    e.preventDefault();
+                    is_all_field_ok = false;
                 }else{
                     alertMessage("#firstName","#first-name-alert","",false,is_focus);
                 }
             }else{
                 is_focus = false;
-                e.preventDefault();
+                is_all_field_ok = false;
             }
             
 
@@ -37,13 +41,13 @@ $(document).ready(function(){
                 if(/^[^\d\[\]`!@#$%^&*()_+\\{}|;':\",./<>?]*$/.test(lastName) == false){
                     alertMessage("#lastName","#last-name-alert","Your last name is NOT VALID, we don't allow special characters and digit","alert alert-danger",true,is_focus);
                     is_focus = false;
-                    e.preventDefault();
+                    is_all_field_ok = false;
                 }else{
                     alertMessage("#lastName","#last-name-alert","",false,is_focus);
                 }
             }else{
                 is_focus = false;
-                e.preventDefault();
+                is_all_field_ok = false;
             }
 
 
@@ -53,7 +57,7 @@ $(document).ready(function(){
             if(is_empty == false){
             }else{
                 is_focus = false;
-                e.preventDefault();
+                is_all_field_ok = false;
             }
 
             //check phone number
@@ -64,13 +68,18 @@ $(document).ready(function(){
                 if(/^0[1-9]\d{8}$/.test(phone) == false){
                     alertMessage("#phone","#phone-alert","Your phone number is NOT VALID","alert alert-danger",true,is_focus);
                     is_focus = false;
-                    e.preventDefault();
+                    is_all_field_ok = false;
                 }else{
                     alertMessage("#register-phone-group","#register-phone-err","",false,is_focus);
                 }
             }else{
                 is_focus = false;
-                e.preventDefault();
+                is_all_field_ok = false;
+            }
+
+            if(is_all_field_ok == true){
+                let url = URLROOT + "/checkouts/payment/" + firstName + "/" + lastName + "/" + address + "/" + phone;
+                window.location.href = url;
             }
 
         });
@@ -104,7 +113,12 @@ $(document).ready(function(){
             }
         }
     }
-    if(currentLink.split('/')[4] == 'checkouts'){
+
+
+    /***FOR CHECKOUT PAYMENT PAGE***/
+    if(currentLink.split('/')[4] == 'checkouts' && currentLink.split('/')[5] == 'payment'){
+        let userID = $('#userID').val();
+
         $("input[name$='payment']").click(function(){
             var demovalue = $(this).val(); 
             $("div.myDiv").hide();
@@ -115,12 +129,23 @@ $(document).ready(function(){
             $('[data-toggle="popover"]').popover()
         })
         
-        $('#CODOrder').on('click',function(){
-            setCookie('payment','COD');
+        //FOR THREE BUTTON PAYMENT SUBMIT
+        $('#CODOrder').on('click',function(e){
+            e.preventDefault();
+            if(confirm("Do you want to pay this bill?")){
+                saveBill(userID);
+                let url = URLROOT + "/checkouts/thankyou/Ship COD";
+                window.location.href = url;
+            } 
         });
 
-        $('#BankOrder').on('click',function(){
-            setCookie('payment','Bank Tranfers');
+        $('#BankOrder').on('click',function(e){
+            e.preventDefault();
+            if(confirm("Do you want to pay this bill?")){
+                saveBill(userID);
+                let url = URLROOT + "/checkouts/thankyou/Credit Card";
+                window.location.href = url;
+            }
         });
     
         $("#payment-button").click(function(e) {
@@ -135,16 +160,64 @@ $(document).ready(function(){
             else {
                 e.preventDefault();
                 e.stopPropagation();
-                setCookie('payment','Credit Card');
-                window.location.href = URLROOT + "/checkouts/thankyou";
+                if(confirm("Do you want to pay this bill?")){
+                    saveBill(userID);
+                    let url = URLROOT + "/checkouts/thankyou/Bank Tranfers";
+                    window.location.href = url;
+                }
             }
             
             form.addClass('was-validated');
         });
+
+        function saveBill(userID){
+            let billID = createBillID();
+            $.ajax({
+                url: URLROOT + "/checkouts/saveBill/" + userID + "/" + billID,
+                type: 'POST',
+                cache:false,
+                success:function(data){
+                    console.log(data);
+                }
+            });
+        }
+
+        function createBillID(){
+            let d = new Date();
+            
+            let day = d.getDate().toString();
+            let month = (d.getMonth() + 1).toString();
+            let year = d.getFullYear().toString();
+            let hours = (d.getHours()).toString();
+            let minutes = d.getMinutes().toString();
+            let seconds = d.getSeconds().toString();
+
+            if(month.length < 2){
+                month = "0" + month;
+            }
+            if(day.length < 2){
+                day = "0" + day;
+            }
+            if(hours.length < 2){
+                hours = "0" + hours;
+            }
+            if(minutes.length < 2){
+                minutes = "0" + minutes;
+            }
+            if(seconds.length < 2){
+                seconds = "0" + seconds;
+            }
+
+            let result = day + month + year + hours + minutes + seconds;
+
+            return result;
+
+        }
     }
+
+
+    /***FOR CHECKOUT THANKYOU PAGE***/
     if(currentLink.split('/')[4] == 'checkouts' && currentLink.split('/')[5] == 'thankyou'){
-        let payment = getCookie('payment');
-        $('#paymentDisplay').html('You chose ' + payment + ' for payment');
-        eraseCookie('payment');
+        
     }
 });

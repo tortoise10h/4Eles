@@ -3,11 +3,48 @@
         public function __construct(){
             $this->profileModel = $this->model('Profile');
             $this->userModel = $this->model('User');
+            $this->billModel = $this->model('Bill');
+            $this->shopModel = $this->model('Shop');
         }
 
         public function index(){
-            $result = $this->getCurrentUserAndParseToAssocArr();
+            $currentUser = $this->getCurrentUserAndParseToAssocArr();
+            $bills = $this->getBillListOfUser($currentUser['id']);
+            $result = [
+                'currentUser' => $currentUser,
+                'bills' => $bills
+            ];
             $this->view('profiles/index',$result);
+        }
+
+        public function getBillListOfUser($userID){
+            $billList = $this->billModel->getBillsByUserID($userID);
+            $bills = [];
+
+            foreach($billList as $bill){
+                $billDetailList = $this->billModel->getBillDetailByBillID($bill->id);
+                $billDetails = [];
+                //get bill detail follow by bill id
+                foreach($billDetailList as $billDetail){
+                    $product = $this->shopModel->getProductDetail($billDetail->productID);
+                    $temp = [
+                        'productName' => $product->name,
+                        'quantity' => $billDetail->quantity,
+                        'totalPrice' => $billDetail->totalPrice
+                    ];
+                    $billDetails[] = $temp;
+                }
+                $billTemp = [
+                    'billID' => $bill->id,
+                    'purchaseDate' => $bill->created_at,
+                    'totalPrice' => $bill->totalPrice,
+                    'processStatus' => $bill->processStatus,
+                    'billDetails' => $billDetails
+                ];
+
+                $bills[] = $billTemp;
+            }
+            return $bills;
         }
 
         public function updateUserInfo(){

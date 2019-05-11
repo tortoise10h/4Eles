@@ -11,5 +11,7 @@
             $row = $this->db->singleResult();
             return $row;
         }
+
+        
     }
 ?>
