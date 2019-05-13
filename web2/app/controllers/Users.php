@@ -90,9 +90,11 @@
             }
         }
         public function createUserSession($user){
+            $userFullName = $user->firstname . " " . $user->lastname;
+
             $_SESSION['user_id'] = $user->id;
             $_SESSION['user_email'] = $user->email;
-            $_SESSION['user_name'] = $user->firstname;
+            $_SESSION['user_name'] = $userFullName;
             $_SESSION['user_role'] = $user->roleID;
         }
         public function logout(){

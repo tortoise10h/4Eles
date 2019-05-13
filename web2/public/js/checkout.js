@@ -143,7 +143,7 @@ $(document).ready(function(){
             e.preventDefault();
             if(confirm("Do you want to pay this bill?")){
                 saveBill(userID);
-                let url = URLROOT + "/checkouts/thankyou/Credit Card";
+                let url = URLROOT + "/checkouts/thankyou/Bank Tranfers";
                 window.location.href = url;
             }
         });
@@ -162,7 +162,7 @@ $(document).ready(function(){
                 e.stopPropagation();
                 if(confirm("Do you want to pay this bill?")){
                     saveBill(userID);
-                    let url = URLROOT + "/checkouts/thankyou/Bank Tranfers";
+                    let url = URLROOT + "/checkouts/thankyou/Credit Card";
                     window.location.href = url;
                 }
             }

@@ -195,6 +195,7 @@ $(document).ready(function(){
                 data: formData,
                 success:function(data){
                     // console.log(data);
+
                     let message = $.parseJSON(data);
                     if(message.status == 'success'){
                         $('#login-general-alert').html(message.alert);

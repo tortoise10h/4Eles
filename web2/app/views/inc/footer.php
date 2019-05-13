@@ -84,6 +84,7 @@
   <script src="<?php echo URLROOT; ?>/js/jquery.magnific-popup.min.js"></script>
   <script src="<?php echo URLROOT; ?>/js/aos.js"></script>
   <script src="<?php echo URLROOT; ?>/js/js_config.js"></script>
+  <script src="<?php echo URLROOT; ?>/js/main-admin.js"></script>
 
   <script src="<?php echo URLROOT; ?>/js/cookie_helpers.js"></script>
   <script src="<?php echo URLROOT; ?>/js/main.js"></script>

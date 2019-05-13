@@ -185,7 +185,7 @@ $(document).ready(function(){
                                 '<a href="' + URLROOT + '/shops/productDetail/' + product.categoryID + '/' + product.id +'"><img src="' + URLROOT + product.imgLink + '/' + product.id + '_1.jpg"' + 'class="img-fluid"></a>' +
                             '</figure>' +
                             '<div class="img-card-name block-4-text p-4">' +
-                                '<h3><a href="' + URLROOT + '/shops/productDetail/' + product.categoryID + '/' + product.id +'">'+ product.name + '</a></h3>' +
+                                '<h3><a href="' + URLROOT + '/shops/productDetail/' + product.categoryID + '/' + product.id +'" style="word-wrap: break-word;max-width:200px">'+ product.name + '</a></h3>' +
                             '</div>'+
                             '<div class="img-card-price block-4-text p-4">' +
                                 '<p class="text-primary font-weight-bold">$'+ product.price +'</p>' +

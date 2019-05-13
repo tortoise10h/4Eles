@@ -21,6 +21,9 @@
               <div class="site-top-icons">
                 <ul>
                   <?php if(isset($_SESSION['user_id'])) : ?>
+                    <?php if($_SESSION['user_role'] > 1) : ?>
+                      <li id="userRole"><a href="<?php echo URLROOT?>/admins/products"><i class="fas fa-user-shield"></i> Admin Page</a></li>
+                    <?php endif; ?>
                     <li id="user-info"><a href="<?php echo URLROOT?>/profiles/index"><span class="icon icon-person"></span> Hello <?php echo $_SESSION['user_name']; ?></a></li>
                     <li><a href="<?php echo URLROOT; ?>/users/logout">Log out</a></li>
                   <?php else: ?>

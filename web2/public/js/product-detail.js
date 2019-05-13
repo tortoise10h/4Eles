@@ -7,7 +7,7 @@ $(document).ready(function(){
         let quantity = $('#cartProductQuantity').val();
         //CHECK USER LOGIN
         $.ajax({
-            url: 'http://localhost:8080/web2/users/isLogin',
+            url: URLROOT + '/users/isLogin',
             type: 'POST',
             cache:false,
             success:function(data){
@@ -24,7 +24,7 @@ $(document).ready(function(){
     });
     function addToCart(productID,quantity,userID){
         $.ajax({
-            url: 'http://localhost:8080/web2/shops/addToCart/' + productID + '/' + quantity + '/' + userID,
+            url: URLROOT + '/shops/addToCart/' + productID + '/' + quantity + '/' + userID,
             type: 'POST',
             cache:false,
             success:function(data){
@@ -38,7 +38,7 @@ $(document).ready(function(){
     function loadCartQuantity(){
         //Get current login user
         $.ajax({
-            url: 'http://localhost:8080/web2/users/isLogin',
+            url: URLROOT + '/users/isLogin',
             type: 'POST',
             cache:false,
             success:function(data){
@@ -50,7 +50,7 @@ $(document).ready(function(){
     }
     function getCartQuantity(userID){
         $.ajax({
-            url: 'http://localhost:8080/web2/carts/getCartQuantity/' + userID,
+            url: URLROOT + '/carts/getCartQuantity/' + userID,
             type: 'POST',
             cache: false,
             success: function(data){

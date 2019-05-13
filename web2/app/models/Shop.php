@@ -44,18 +44,21 @@
         public function getLimitProducts($record_per_page,$start_from,$categoryID){
             if($categoryID == 'all'){
                 //load all product
-                $this->db->query("SELECT * FROM products ORDER BY created_at DESC LIMIT $start_from, $record_per_page");
+                $this->db->query("SELECT * FROM products WHERE status = :status ORDER BY created_at DESC LIMIT $start_from, $record_per_page");
+                $this->db->bind(':status',true);
             }else{
                 //load by category
-                $this->db->query("SELECT * FROM products WHERE categoryID = :categoryID ORDER BY created_at DESC  LIMIT $start_from, $record_per_page");
+                $this->db->query("SELECT * FROM products WHERE categoryID = :categoryID AND status = :status ORDER BY created_at DESC  LIMIT $start_from, $record_per_page");
                 $this->db->bind(':categoryID',$categoryID);
+                $this->db->bind(':status',true);
             }
             $products = $this->db->resultSet();
             return $products;
         }
 
         public function getAllProducts(){
-            $this->db->query("SELECT * FROM products ORDER BY created_at DESC");
+            $this->db->query("SELECT * FROM products WHERE status = :status ORDER BY created_at DESC");
+            $this->db->bind(':status',true);
             $products = $this->db->resultSet();
             return $products;
         }
@@ -140,10 +143,12 @@
 
         public function countProduct($categoryID){
             if($categoryID == 'all'){
-                $this->db->query("SELECT * FROM products ORDER BY created_at DESC");   
+                $this->db->query("SELECT * FROM products WHERE status = :status ORDER BY created_at DESC");   
+                $this->db->bind(':status',true);
             }else{
-                $this->db->query("SELECT * FROM products WHERE categoryID = :categoryID ORDER BY created_at DESC");
+                $this->db->query("SELECT * FROM products WHERE categoryID = :categoryID AND status = :status ORDER BY created_at DESC");
                 $this->db->bind(':categoryID',$categoryID);
+                $this->db->bind(':status',true);
             }
             $rows = $this->db->resultSet();
             $numOfProduct = $this->db->rowCount();
@@ -211,8 +216,9 @@
         
 
         public function getProductDetail($productID){
-            $this->db->query("SELECT * FROM products WHERE id = :id");
+            $this->db->query("SELECT * FROM products WHERE id = :id AND status = :status");
             $this->db->bind(':id',$productID);
+            $this->db->bind(':status',true);
             $row = $this->db->singleResult();
             return $row;    
         }
