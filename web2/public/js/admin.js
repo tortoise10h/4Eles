@@ -4,11 +4,13 @@ $(document).ready(function(){
     if(currentLink.split('/')[4] == 'admins' && currentLink.split('/')[5] == 'products'){
         //FOR ADMIN PRODUCTS PAGE
         console.log("admin product page ");
+
         loadProductsTable();
         editProductCheck();
         addProductCheck();
         editProductSelectBoxChange();
-        addProductSelectBoxChange()
+        addProductSelectBoxChange();
+        sortProductTable();
 
         function editProductCheck(){
             $('#editSubmit').on('click',function(e){
@@ -341,6 +343,15 @@ $(document).ready(function(){
             });
         }
 
+        function sortProductTable(){
+            $('#sortChoicesBox').on('change',function(){
+                var e = document.getElementById("sortChoicesBox");
+                var sortValue = e.options[e.selectedIndex].value;
+                loadProductsTable(sortValue);
+                console.log(sortValue);
+            });
+        }
+
 
         function isFieldEmpty(fieldCheck,fieldID,messageBoxID,message,is_focus){ 
             if(fieldCheck == ''){
@@ -369,12 +380,90 @@ $(document).ready(function(){
                 $(fieldID).removeClass(classesName);
             }
         }
+
+
     }
 });
 
-function loadProductsTable(sort='none',price='@none@--@none@'){
+function quickSearchOnProductTable(){
+    let rows = document.getElementById('productTableBody').getElementsByTagName('tr');
+
+    $('#quickSearchBox').on('keyup',function(){
+        let columnSearch = document.getElementById('quickSearchChoicesBox').value;
+        let searchValue = $('#quickSearchBox').val().toLowerCase();
+        for(let i = 0; i < rows.length; i++){
+            let columnValue = rows[i].getElementsByTagName('td')[columnSearch].innerText.toLowerCase();
+            if(columnValue.indexOf(searchValue) > -1){
+                rows[i].style.display = "";
+            }else{
+                rows[i].style.display = "none";
+            }
+        }       
+    });
+}
+
+function searchFromPriceOnProductTable(){
+    let rows = document.getElementById('productTableBody').getElementsByTagName('tr');
+
+    $('#fromPriceBox').on('keyup',function(){
+        let columnSearch = document.getElementById('quickSearchChoicesBox').value;
+        let fromPriceValue = 0;
+        if($('#fromPriceBox').val() == ""){
+            fromPriceValue = 0;
+        }else{
+            fromPriceValue = parseInt($('#fromPriceBox').val());
+        }
+        for(let i = 0; i < rows.length; i++){
+            let columnValue = rows[i].getElementsByTagName('td')[3].innerText;
+            columnValue = columnValue.replace('$','');
+            columnValue = parseInt(columnValue);
+            if(columnValue >= fromPriceValue){
+                rows[i].style.display = "";
+            }else{
+              rows[i].style.display = "none";
+            }
+        }       
+    });   
+}
+function searchToPriceOnProductTable(){
+    let rows = document.getElementById('productTableBody').getElementsByTagName('tr');
+
+    $('#toPriceBox').on('keyup',function(){
+        let columnSearch = document.getElementById('quickSearchChoicesBox').value;
+        let fromPriceValue = 0;
+        if($('#fromPriceBox').val() == ""){
+            fromPriceValue = 0;
+        }else{
+            fromPriceValue = parseInt($('#fromPriceBox').val());
+        }
+
+        let toPriceValue = $('#toPriceBox').val();
+        for(let i = 0; i < rows.length; i++){
+            let columnValue = rows[i].getElementsByTagName('td')[3].innerText;
+            columnValue = columnValue.replace('$','');
+            columnValue = parseInt(columnValue);
+            
+            if(toPriceValue == ""){
+                if(columnValue >= fromPriceValue){
+                    rows[i].style.display = "";
+                }else{
+                    rows[i].style.display = "none";
+                }
+            }else{
+                toPriceValue = parseInt(toPriceValue);
+                if(columnValue >= fromPriceValue && columnValue <= toPriceValue){
+                    rows[i].style.display = "";
+                }else{
+                    rows[i].style.display = "none";
+                }
+            }
+        }       
+    });   
+}
+
+function loadProductsTable(sort='none'){
     $.ajax({
-        url: URLROOT + '/admins/getProducts/' + sort + '/' + price,
+        url: URLROOT + '/admins/getProducts/' + sort,
         type: 'POST', 
         cache: false,
         success:function(data){
@@ -383,6 +472,9 @@ function loadProductsTable(sort='none',price='@none@--@none@'){
             let result = $.parseJSON(data);
             let productsShow = createProductTableBody(result.products);
             $('#productTableBody').html(productsShow);
+            quickSearchOnProductTable();
+            searchFromPriceOnProductTable();
+            searchToPriceOnProductTable();
         }
     });
 } 

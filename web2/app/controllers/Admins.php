@@ -25,9 +25,9 @@
             $this->view('admins/statistics');
         }
 
-        public function getProducts($sort = 'none',$price = '@none@--@none@'){
+        public function getProducts($sort = 'none'){
             
-            $products = $this->adminModel->getAllProducts($sort,$price);
+            $products = $this->adminModel->getAllProducts($sort);
             
             $productArr = [];
             

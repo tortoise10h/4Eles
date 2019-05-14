@@ -14,9 +14,9 @@
                                         <div class="col-md-4  mt-2 ml-2">
                                             <div id="quickSearchChoices">
                                                 <select style="font-size:14px;border:none;padding:10px 0" id="quickSearchChoicesBox" class="shadow-sm rounded"> 
-                                                    <option value="1">Search ID</option>
-                                                    <option value="2">Search name</option>
-                                                    <option value="5">Search status</option>
+                                                    <option value="0">Search ID</option>
+                                                    <option value="1">Search name</option>
+                                                    <option value="4">Search status</option>
                                                 </select>
                                                 <input style="padding:6px 2px" type="text" name="quick-search-box" id="quickSearchBox" class="shadow-sm rounded" placeholder="Type here to search">
                                             </div>
@@ -30,10 +30,10 @@
                                         <div class="col-md-2 mt-2 ml-2">
                                             <select style="font-size:14px;border:none;padding:10px 0" id="sortChoicesBox" class="shadow-sm rounded"> 
                                                     <option value="none">None</option>
-                                                    <option value="AtoZ">Name, A to Z</option>
-                                                    <option value="ZtoA">Name, Z to A</option>
-                                                    <option value="LowtoHigh">Price, Low to High</option>
-                                                    <option value="HightoLow">Price, High to Low</option>
+                                                    <option value="nameAtoZ">Name, A to Z</option>
+                                                    <option value="nameZtoA">Name, Z to A</option>
+                                                    <option value="priceLowToHigh">Price, Low to High</option>
+                                                    <option value="priceHighToLow">Price, High to Low</option>
                                             </select>
                                     </div>   
                                 <div class="table-responsive table--no-card m-b-30">

@@ -5,47 +5,24 @@
             $this->db = new Database;
         }
 
-        public function getAllProducts($sort,$price){
-            $price = explode('--',$price);
+        public function getAllProducts($sort){
 
-            $query = 'SELECT * FROM products WHERE 1';
-
-            //price handle
-            if($price[0] != '@none@' && $price[1] != '@none@'){
-                $query .= " AND price >= :fromprice AND price <= :toprice";
-            }elseif($price[0] == '@none@' && $price[1] != '@none@'){
-                $query .= " AND price <= :toprice";
-            }elseif($price[0] != '@none@' && $price[1] == '@none@'){
-                $query .= " AND price >= :fromprice";
-            }
+            $query = 'SELECT * FROM products ';
 
             //sort handle
             if($sort == 'none'){
                 $query .= " ORDER BY created_at DESC";
             }elseif($sort == 'priceLowToHigh'){
-                $query .= " ORDER BY price ASC LIMIT";
+                $query .= " ORDER BY price ASC";
             }elseif($sort == 'priceHighToLow'){
-                $query .= " ORDER BY price DESC LIMIT";
+                $query .= " ORDER BY price DESC";
             }elseif($sort == 'nameAtoZ'){
-                $query .= " ORDER BY name ASC LIMIT";
+                $query .= " ORDER BY name ASC";
             }elseif($sort == 'nameZtoA'){
-                $query .= " ORDER BY name DESC LIMIT";
+                $query .= " ORDER BY name DESC";
             }
 
             $this->db->query($query);
-
-            if($price[0] != '@none@' && $price[1] != '@none@'){
-                $fromPrice = (int) $price[0];
-                $toPrice = (int) $price[1];
-                $this->db->bind(':fromprice',$fromPrice);
-                $this->db->bind(':toprice',$toPrice);
-            }elseif($price[0] == '@none@' && $price[1] != '@none@'){
-                $toPrice = (int) $price[1];
-                $this->db->bind(':toprice',$toPrice);
-            }elseif($price[0] != '@none@' && $price[1] == '@none@'){
-                $fromPrice = (int) $price[0];
-                $this->db->bind(':fromprice',$fromPrice);
-            }
 
             $products = $this->db->resultSet();
             return $products;
