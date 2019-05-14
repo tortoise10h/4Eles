@@ -14,7 +14,7 @@ $(document).ready(function(){
                data = $.parseJSON(data);
                if(data.status == 'true'){
                    let userID = data.userID;
-                   alert('hola, product id: ' + productID + ', quantity: ' + quantity);
+                   alert('Add product to cart success');
                    addToCart(productID,quantity,userID);
                }else if(data.status == 'false'){
                    alert('You have to login first');

@@ -20,9 +20,10 @@
     </script>
 
     <!-- Main JS-->
-    <script src="<?php echo URLROOT; ?>/js/js_config.js"></script>
     <script src="<?php echo URLROOT; ?>/js/main-admin.js"></script>
-    <script src="<?php echo URLROOT; ?>/js/admin.js"></script>
+    <script src="<?php echo URLROOT; ?>/js/admin-products.js"></script>
+    <script src="<?php echo URLROOT; ?>/js/admin-orders.js"></script>
+    
 
 </body>
 

@@ -3,6 +3,8 @@
         public function __construct(){
             $this->adminModel = $this->model('Admin');
             $this->shopModel = $this->model('Shop');
+            $this->userModel = $this->model('User');
+            $this->billModel = $this->model('Bill');
         }
 
         public function index(){
@@ -257,6 +259,70 @@
             }else{
                 echo 0;
             }
+        }
+
+
+
+        public function getOrders($sort = 'none'){
+            
+            $orders = $this->adminModel->getAllOrders($sort);
+            
+            $orderArr = [];
+            
+            foreach($orders as $order){
+                $user = $this->userModel->getUserInfoById($order->customerID);
+                $userEmail = $user->email;
+                $orderArr[] = [
+                    'id' => $order->id,
+                    'totalPrice' => $order->totalPrice,
+                    'date' => $order->created_at,
+                    'processStatus' => $order->processStatus,
+                    'userEmail' => $userEmail
+                ];
+            }
+            
+            $result = [
+                'orders' => $orderArr,
+            ];
+            
+            echo json_encode($result);
+        }
+
+
+
+        public function getOrderInfo($orderID){
+            $bill = $this->billModel->getBillByID($orderID);
+            $billDetails = $this->billModel->getBillDetailByBillID($orderID);
+            $userID = $bill->customerID;
+            $user = $this->userModel->getUserInfoById($userID);
+
+            $userInfo = [
+                'firstname' => $user->firstname,
+                'lastname' => $user->lastname,
+                'email' => $user->email,
+                'phone' => $user->phone,
+                'sex' => $user->sex,
+                'address' => $user->address
+            ];
+
+            $billDetailList = [];
+            foreach($billDetails as $billDetail){
+                $product = $this->shopModel->getProductDetail($billDetail->productID);
+                $temp = [
+                    'productName' => $product->name,
+                    'quantity' => $billDetail->quantity,
+                    'totalPrice' => $billDetail->totalPrice
+                ];
+
+                $billDetailList[] = $temp;
+            }
+
+            $orderInfo = [
+                'billDetails' => $billDetailList,
+                'userInfo' => $userInfo
+            ];
+
+            echo json_encode($orderInfo);
         }
     }
 ?>

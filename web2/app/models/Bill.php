@@ -66,5 +66,12 @@
                 return false;
             }
         }
+
+        public function getBillByID($billID){
+            $this->db->query('SELECT * FROM bill WHERE id = :id');
+            $this->db->bind(':id',$billID);
+            $row = $this->db->singleResult();
+            return $row;
+        }
     }
 ?>

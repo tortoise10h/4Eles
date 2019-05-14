@@ -33,6 +33,8 @@
     <link href="<?php echo URLROOT; ?>/css/theme.css" rel="stylesheet" media="all">
     <link href="<?php echo URLROOT; ?>/css/core-admin-custom.css" rel="stylesheet">
 
+    <script src="<?php echo URLROOT; ?>/js/js_config.js"></script>
+
 </head>
 
 <body class="animsition">

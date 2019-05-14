@@ -23,7 +23,7 @@
             <div class="row mb-5">
             
               <div class="col-md-6">
-                <a href="http://localhost:8080/web2/shops/index" class="btn btn-primary btn-block btn-sm text-white">Continue Shopping</a>
+                <a href="<?php echo URLROOT; ?>/shops/index" class="btn btn-primary btn-block btn-sm text-white">Continue Shopping</a>
               </div>
             </div>
             <div class="row">

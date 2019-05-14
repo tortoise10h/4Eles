@@ -197,7 +197,23 @@ $(document).ready(function(){
         }
         function createPaginationShow(totalPages,pageActive,categoryID){
             let active = parseInt(pageActive);
-            let text = '<ul><li><button data="' + URLROOT + '/shops/index/category=' + categoryID + "/page=" + (active - 1) + '" class="pagination-btn" id="' + (active - 1) + '">&lt;</button></li>';  //button pre
+
+            let nextPageNumber;
+            let prePageNumber;
+
+            if(active == totalPages){
+                nextPageNumber = 1;
+            }else{
+                nextPageNumber = active + 1;
+            }
+
+            if(active == 1  ){
+                prePageNumber = totalPages;
+            }else{
+                prePageNumber = active - 1;
+            }
+
+            let text = '<ul><li><button data="' + URLROOT + '/shops/index/category=' + categoryID + "/page=" + prePageNumber + '" class="pagination-btn" id="' + prePageNumber + '">&lt;</button></li>';  //button pre
         
             for(let i = 1; i <= totalPages; i++){
                 if(pageActive == i){
@@ -206,13 +222,28 @@ $(document).ready(function(){
                     text += '<li><button data="' + URLROOT + '/shops/index/category=' + categoryID + '/page=' + i + '" class="pagination-btn" id="'+ i +'">'+ i + '</button></li>';
                 }
             }
-            text += '<li><button data="' + URLROOT + '/shops/index/category=' + categoryID + "/page=" + (active + 1) + '" class="pagination-btn" id="' + (active + 1) + '">&gt;</button></li></ul>'; //button next
+            text += '<li><button data="' + URLROOT + '/shops/index/category=' + categoryID + "/page=" + nextPageNumber + '" class="pagination-btn" id="' + nextPageNumber + '">&gt;</button></li></ul>'; //button next
             return text;
         }
 
         function createPaginationSearchShow(totalPages,pageActive,categoryID,searchVal,price,color,sort){
             let active = parseInt(pageActive);
-            let text = '<ul><li><button data="' + URLROOT + '/shops/loadSearchProducts/category=' + categoryID + "/page=" + (active - 1) + "/price=" + price + "/color=" + color + "/search=" + searchVal + "/sort=" + sort + '" class="pagination-search-btn" id="' + (active - 1) + '">&lt;</button></li>';  //button pre
+            let nextPageNumber;
+            let prePageNumber;
+
+            if(active == totalPages){
+                nextPageNumber = 1;
+            }else{
+                nextPageNumber = active + 1;
+            }
+
+            if(active == 1){
+                prePageNumber = totalPages;
+            }else{
+                prePageNumber = active - 1;
+            }
+
+            let text = '<ul><li><button data="' + URLROOT + '/shops/loadSearchProducts/category=' + categoryID + "/page=" + prePageNumber + "/price=" + price + "/color=" + color + "/search=" + searchVal + "/sort=" + sort + '" class="pagination-search-btn" id="' + prePageNumber + '">&lt;</button></li>';  //button pre
         
             for(let i = 1; i <= totalPages; i++){
                 if(pageActive == i){
@@ -221,7 +252,7 @@ $(document).ready(function(){
                     text += '<li><button data="' + URLROOT +'/shops/loadSearchProducts/category=' + categoryID + "/page=" + i + "/price=" + price + "/color=" + color + "/search=" + searchVal + "/sort=" + sort + '" class="pagination-search-btn" id="'+ i +'">'+ i + '</button></li>';
                 }
             }
-            text += '<li><button data="' + URLROOT + '/shops/loadSearchProductss/category=' + categoryID + "/page=" + (active + 1) + "/price=" + price + "/color=" + color + "/search=" + searchVal + "/sort=" + sort + '" class="pagination-search-btn" id="' + (active + 1) + '">&gt;</button></li></ul>'; //button next
+            text += '<li><button data="' + URLROOT + '/shops/loadSearchProductss/category=' + categoryID + "/page=" + nextPageNumber + "/price=" + price + "/color=" + color + "/search=" + searchVal + "/sort=" + sort + '" class="pagination-search-btn" id="' + nextPageNumber + '">&gt;</button></li></ul>'; //button next
             return text;
         }
 

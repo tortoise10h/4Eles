@@ -113,5 +113,29 @@
                 return false;
             }
         }
+
+
+        /*** FOR ORDERS ***/
+        public function getAllOrders($sort){
+
+            $query = 'SELECT * FROM bill ';
+
+            //sort handle
+            if($sort == 'dateNewToOld'){
+                $query .= " ORDER BY created_at DESC";
+            }elseif($sort == 'dateOldToNew'){
+                $query .= " ORDER BY created_at ASC";
+            }elseif($sort == 'priceLowToHigh'){
+                $query .= " ORDER BY totalPrice ASC";
+            }elseif($sort == 'priceHighToLow'){
+                $query .= " ORDER BY totalPrice DESC";
+            }
+
+            $this->db->query($query);
+
+            $orders = $this->db->resultSet();
+            return $orders;
+        }
+
     }
 ?>

@@ -34,11 +34,23 @@
                     ];
                     $billDetails[] = $temp;
                 }
+                //jamdle bill process status
+                $processStatus = '';
+                if($bill->processStatus == 1){
+                    $processStatus = 'Processing';
+                }elseif($bill->processStatus == 2){
+                    $processStatus = 'Delivering';
+                }elseif($bill->processStatus == 3){
+                    $processStatus = 'Success';
+                }elseif($bill->processStatus == 4){
+                    $processStatus = 'Cancel';
+                }
+
                 $billTemp = [
                     'billID' => $bill->id,
                     'purchaseDate' => $bill->created_at,
                     'totalPrice' => $bill->totalPrice,
-                    'processStatus' => $bill->processStatus,
+                    'processStatus' => $processStatus,
                     'billDetails' => $billDetails
                 ];
 
@@ -58,7 +70,12 @@
 
             $this->userModel->updateUserInfo($email,$firstname,$lastname,$gender,$phone,$address,$birthday);
 
-            $result = $this->getCurrentUserAndParseToAssocArr();
+            $currentUser = $this->getCurrentUserAndParseToAssocArr();
+            $bills = $this->getBillListOfUser($currentUser['id']);
+            $result = [
+                'currentUser' => $currentUser,
+                'bills' => $bills
+            ];
             $this->view('profiles/index',$result);
             
         }

@@ -1,32 +1,44 @@
 <?php require APPROOT . '/views/inc/admin-header.php'; ?>
             <!-- MAIN CONTENT-->
-            <div class="main-content">
+            <div class="main-content" style="overflow-X:scroll">
                 <div class="section__content section__content--p30">
                     <div class="container">
                         <div class="row">
                             <div class="col-lg-20">
+                                    <div class="row">
+                                        <div class="col-sm-4 my-2  ml-2">
+                                            <div id="quickSearchChoices">
+                                                <select style="font-size:14px;border:none;padding:10px 0" id="" class="shadow-sm rounded"> 
+                                                    <option value="1">Search ID</option>
+                                                    <option value="4">Search status</option>
+                                                    <option value="6">Search email</option>
+                                                </select>
+                                                <input style="padding:6px 2px" type="text" name="order-quick-search" id="orderQuickSearch" class="shadow-sm rounded" placeholder="Type here to search">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3 my-2 ml-2">
+                                            <div>
+                                                <input style="font-size:12px;padding:9px 3px;max-width:100px" type="number" name="order-from-price-box" id="orderFromPriceBox" class="rounded shadow-sm" placeholder="From price"> <small>_</small>
+                                                <input style="font-size:12px;padding:9px 3px;max-width:100px" type="number" name="order-to-price-box" id="orderToPriceBox" class="rounded shadow-sm" placeholder="To price">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4"></div>
+                                    </div>
                                     <div class="table-responsive table--no-card m-b-30">
-                                            <table class="table table-borderless table-striped table-earning">
+                                            <table class="table table-borderless table-striped table-earning" style="font-size:13px">
                                                 <thead>
                                                     <tr>
-                                                        <th>date</th>
-                                                        <th>order ID</th>
-                                                        <th>name</th>
-                                                        <th>price</th>
-                                                        <th>quantity</th>
-                                                        <th>total</th>
+                                                        <th style="font-size:14px;max-width:30px"></th>
+                                                        <th style="font-size:14px">ORDER ID</th>
+                                                        <th style="font-size:14px;max-width:50px">PRICE</th>
+                                                        <th style="font-size:14px">DATE</th>
+                                                        <th style="font-size:14px">STATUS</th>
+                                                        <th style="font-size:14px">OPERATION</th>
+                                                        <th style="font-size:14px">CUSTOMER</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody class="text-center">
-                                                    <tr>
-                                                        <td>2018-09-29 05:57</td>
-                                                        <td>100398</td>
-                                                        <td>iPhone X 64Gb Grey</td>
-                                                        <td>$999.00</td>
-                                                        <td>1</td>
-                                                        <td>$999.00</td>
-                                                    </tr>
-                                                    
+                                                <tbody class="text-center" id="orderTableBody">
+                                                    <!-- ORDER TABLE SHOW HERE -->
                                                 </tbody>
                                             </table>
                                         </div>
@@ -38,6 +50,59 @@
             <!-- END MAIN CONTENT-->
         </div>
         <!-- END PAGE CONTAINER-->
+
+        <!-- ORDER INFO DIALOG -->
+        <div class="modal fade" id="orderInfo" tabindex="-1" role="dialog" aria-labelledby="orderInfoTitle" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="orderInfoTitle">ORDER INFORMATION<span></span></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <table class="table p-3">
+                                    <thead>
+                                        <tr>
+                                            <th>Item</th>
+                                            <th>Quantity</th> 
+                                            <th>Price</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="billDetailTableBody">
+                                        <!-- body of bill detail table -->
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th></th>
+                                            <th>Total: </th> 
+                                            <th>$<span id="billDetailTotalPrice"></span></th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                            <div class="col-md-3" style="line-height:1.5">
+                                <h4>Customer Information</h4>
+                                <hr>
+                                <p><strong>Customer name: </strong> <span id="customerName"></span></p><br>
+                                <p><strong>Email: </strong> <span id="customerEmail"></span></p><br>
+                                <p><strong>Address: </strong><span id="customerAddress"></span></p><br>
+                                <p><strong>Phone number: </strong><span id="customerPhone"></span></p>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- END ORDER INFO DIALOG -->
 
     </div>
 

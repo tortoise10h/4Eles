@@ -111,8 +111,11 @@ $(document).ready(function(){
                 if((d.getFullYear() - parseInt(userDateInput[0])) < 5){
                     profileAlertMessage('#birthday_txt',"#birthday-alert","Our website is NOT for people under 5 years old",is_ok);
                     is_ok = false;
-                    e.preventDefault();
                 }
+            }
+
+            if(is_ok == false){
+                e.preventDefault();
             }
             
         });
