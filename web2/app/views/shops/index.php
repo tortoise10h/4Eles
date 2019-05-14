@@ -2,7 +2,7 @@
 <div class="bg-light py-3">
       <div class="container">
         <div class="row">
-          <div class="col-md-12 mb-0"><a href="<?php echo URLROOT; ?>">Home</a> <span class="mx-2 mb-0">/</span> <strong class="text-black">Shop</strong></div>
+          <div class="col-md-12 mb-0"><a href="<?php echo URLROOT; ?>/pages/index">Home</a> <span class="mx-2 mb-0">/</span> <strong class="text-black">Shop</strong></div>
         </div>
       </div>
     </div>
@@ -116,7 +116,7 @@
                 </div>
                 <div class="row">
                   <div class="col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0" data-aos="fade" data-aos-delay="">
-                    <a class="block-2-item" href="#">
+                    <a class="block-2-item" href="<?php echo URLROOT;?>/shops/index/category=fig">
                       <figure class="image">
                         <img src="<?php echo URLROOT;?>/images/banner/figure-banner.jpg" alt="" class="category-banner-img img-fluid">
                       </figure>
@@ -127,7 +127,7 @@
                     </a>
                   </div>
                   <div class="col-sm-6 col-md-6 col-lg-3 mb-5 mb-lg-0" data-aos="fade" data-aos-delay="100">
-                    <a class="block-2-item" href="#">
+                    <a class="block-2-item" href="<?php echo URLROOT;?>/shops/index/category=plu">
                       <figure class="image">
                         <img src="<?php echo URLROOT;?>/images/banner/plush-banner.jpg" alt="" class="category-banner-img img-fluid">
                       </figure>
@@ -138,7 +138,7 @@
                     </a>
                   </div>
                   <div class="col-sm-6 col-md-6 col-lg-3 mb-5 mb-lg-0" data-aos="fade" data-aos-delay="200">
-                    <a class="block-2-item" href="#">
+                    <a class="block-2-item" href="<?php echo URLROOT;?>/shops/index/category=hat">
                       <figure class="image">
                         <img src="<?php echo URLROOT;?>/images/banner/hat-banner.jpg" alt="" class="category-banner-img img-fluid">
                       </figure>
@@ -149,7 +149,7 @@
                     </a>
                   </div>
                   <div class="col-sm-6 col-md-6 col-lg-3 mb-5 mb-lg-0" data-aos="fade" data-aos-delay="200">
-                    <a class="block-2-item" href="#">
+                    <a class="block-2-item" href="<?php echo URLROOT;?>/shops/index/category=shi">
                       <figure class="image">
                         <img src="<?php echo URLROOT;?>/images/banner/shirt-banner.jpg" alt="" class="category-banner-img img-fluid">
                       </figure>

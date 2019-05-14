@@ -7,7 +7,7 @@
             <div class="intro-text text-center text-md-left">
               <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus at iaculis quam. Integer accumsan tincidunt fringilla. </p>
               <p>
-                <a href="http://localhost:8080/web2/shops/index" class="btn btn-sm btn-primary">Shop Now</a>
+                <a href="<?php echo URLROOT ?>/shops/index" class="btn btn-sm btn-primary">Shop Now</a>
               </p>
             </div>
           </div>
@@ -53,7 +53,7 @@
       <div class="container">
         <div class="row">
           <div class="col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0" data-aos="fade" data-aos-delay="">
-            <a class="block-2-item" href="http://localhost:8080/web2/shops/index/category=fig">
+            <a class="block-2-item" href="<?php echo URLROOT; ?>/shops/index/category=fig">
               <figure class="image">
                 <img src="<?php echo URLROOT ?>/images/banner/figure-banner.jpg" alt="" class="img-fluid category-banner-img">
               </figure>
@@ -64,7 +64,7 @@
             </a>
           </div>
           <div class="col-sm-6 col-md-6 col-lg-3 mb-5 mb-lg-0" data-aos="fade" data-aos-delay="100">
-            <a class="block-2-item" href="http://localhost:8080/web2/shops/index/category=shi">
+            <a class="block-2-item" href="<?php echo URLROOT; ?>/shops/index/category=shi">
               <figure class="image">
                 <img src="<?php echo URLROOT ?>/images/banner/shirt-banner.jpg" alt="" class="img-fluid category-banner-img">
               </figure>
@@ -75,7 +75,7 @@
             </a>
           </div>
           <div class="col-sm-6 col-md-6 col-lg-3 mb-5 mb-lg-0" data-aos="fade" data-aos-delay="100">
-            <a class="block-2-item" href="http://localhost:8080/web2/shops/index/category=plu">
+            <a class="block-2-item" href="<?php echo URLROOT; ?>/shops/index/category=plu">
               <figure class="image">
                 <img src="<?php echo URLROOT ?>/images/banner/plush-banner.jpg" alt="" class="img-fluid category-banner-img">
               </figure>
@@ -86,7 +86,7 @@
             </a>
           </div>
           <div class="col-sm-6 col-md-6 col-lg-3 mb-5 mb-lg-0" data-aos="fade" data-aos-delay="200">
-            <a class="block-2-item" href="http://localhost:8080/web2/shops/index/category=hat">
+            <a class="block-2-item" href="<?php echo URLROOT; ?>/shops/index/category=hat">
               <figure class="image">
                 <img src="<?php echo URLROOT ?>/images/banner/hat-banner.jpg" alt="" class="img-fluid category-banner-img">
               </figure>

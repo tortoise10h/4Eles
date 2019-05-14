@@ -55,7 +55,7 @@
         }
 
         public function getProductByID($productID){
-            $product = $this->shopModel->getProductDetail($productID);
+            $product = $this->shopModel->adminGetProductDetail($productID);
             $categoryList = $this->adminModel->getCategoryList();
 
             $categoryResult = [];
@@ -323,6 +323,14 @@
             ];
 
             echo json_encode($orderInfo);
+        }
+
+        public function changeProcessStatusOfOrder($processStatus,$orderID){
+            if($this->adminModel->changeProcessStatusOfOrder($processStatus,$orderID)){
+                echo 1;
+            }else{
+                echo 0;
+            }
         }
     }
 ?>

@@ -8,13 +8,18 @@
         }
 
         public function index(){
-            $currentUser = $this->getCurrentUserAndParseToAssocArr();
-            $bills = $this->getBillListOfUser($currentUser['id']);
-            $result = [
-                'currentUser' => $currentUser,
-                'bills' => $bills
-            ];
-            $this->view('profiles/index',$result);
+            if($this->isLogin()){
+                $currentUser = $this->getCurrentUserAndParseToAssocArr();
+                $bills = $this->getBillListOfUser($currentUser['id']);
+                $result = [
+                    'currentUser' => $currentUser,
+                    'bills' => $bills
+                ];
+                $this->view('profiles/index',$result);    
+            }else{
+                $this->view('pages/index');    
+            }
+            
         }
 
         public function getBillListOfUser($userID){
@@ -147,6 +152,14 @@
                 echo 1;
             }else{
                 echo 0;
+            }
+        }
+
+        public function isLogin(){
+            if(!empty($_SESSION['user_id'])){
+                return true;
+            }else{
+                return false;
             }
         }
     }

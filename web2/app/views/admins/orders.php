@@ -3,27 +3,44 @@
             <div class="main-content" style="overflow-X:scroll">
                 <div class="section__content section__content--p30">
                     <div class="container">
+                        <div class="my-2">
+                            <select class="p-2 rounded " id="orderSort" style="border:none">
+                                <option value="none">None</option>
+                                <option value="dateOldToNew">From Old date to New date</option>
+                                <option value="dateNewToOld">From New date to Old date</option>
+                                <option value="priceLowToHigh">Price, Low to High</option>
+                                <option value="priceHighToLow">Price, High to Low</option>
+                                
+                            </select>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4 my-2">
+                                <div id="quickSearchChoices">
+                                    <select style="font-size:14px;border:none;padding:10px 0" id="orderQuickSearchChoices" class="shadow-sm rounded"> 
+                                        <option value="1">Search ID</option>
+                                        <option value="4">Search status</option>
+                                        <option value="6">Search email</option>
+                                    </select>
+                                    <input style="padding:6px 2px;max-width:150px" type="text" name="order-quick-search" id="orderQuickSearch" class="shadow-sm rounded" placeholder="Type here to search">
+                                </div>
+                            </div>
+                            <div class="col-sm-4 my-2">
+                                <div>
+                                    <input style="font-size:12px;padding:9px 3px;max-width:100px" type="number" name="order-from-price-box" id="orderFromPriceBox" class="rounded shadow-sm" placeholder="From price"> <span class="mx-2">~</span>
+                                    <input style="font-size:12px;padding:9px 3px;max-width:100px" type="number" name="order-to-price-box" id="orderToPriceBox" class="rounded shadow-sm" placeholder="To price">
+                                </div>
+                            </div>
+                            <div class="col-sm-4 my-2">
+                                <div>
+                                    <input type="date" name="from-date" id="fromDate" style="font-size:12px;padding:9px 0px" class="rounded shadow-sm">
+                                    <span class="mx-2">~</span>
+                                    <input type="date" name="to-date" id="toDate" style="font-size:12px;padding:9px 0px" class="rounded shadow-sm">
+                                </div>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-lg-20">
-                                    <div class="row">
-                                        <div class="col-sm-4 my-2  ml-2">
-                                            <div id="quickSearchChoices">
-                                                <select style="font-size:14px;border:none;padding:10px 0" id="" class="shadow-sm rounded"> 
-                                                    <option value="1">Search ID</option>
-                                                    <option value="4">Search status</option>
-                                                    <option value="6">Search email</option>
-                                                </select>
-                                                <input style="padding:6px 2px" type="text" name="order-quick-search" id="orderQuickSearch" class="shadow-sm rounded" placeholder="Type here to search">
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-3 my-2 ml-2">
-                                            <div>
-                                                <input style="font-size:12px;padding:9px 3px;max-width:100px" type="number" name="order-from-price-box" id="orderFromPriceBox" class="rounded shadow-sm" placeholder="From price"> <small>_</small>
-                                                <input style="font-size:12px;padding:9px 3px;max-width:100px" type="number" name="order-to-price-box" id="orderToPriceBox" class="rounded shadow-sm" placeholder="To price">
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4"></div>
-                                    </div>
+                                    
                                     <div class="table-responsive table--no-card m-b-30">
                                             <table class="table table-borderless table-striped table-earning" style="font-size:13px">
                                                 <thead>

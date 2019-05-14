@@ -137,5 +137,17 @@
             return $orders;
         }
 
+
+        public function changeProcessStatusOfOrder($processStatus,$orderID){
+            $this->db->query('UPDATE bill SET processStatus = :processStatus WHERE id = :id');
+            $this->db->bind(':processStatus',$processStatus);
+            $this->db->bind(':id',$orderID);
+            if($this->db->execute()){
+                return true;
+            }else{
+                return false;
+            }
+        }
+
     }
 ?>

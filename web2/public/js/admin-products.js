@@ -14,7 +14,8 @@ $(document).ready(function(){
 
         function editProductCheck(){
             $('#editSubmit').on('click',function(e){
-                e.preventDefault();
+                if(confirm("Are you sure that you want to edit this product?")){
+                    e.preventDefault();
 
                 let productID = $('#productID').val();
                 let productName = $('#productName').val();
@@ -113,7 +114,7 @@ $(document).ready(function(){
                     });
 
                 }
-                
+                }
             })
         }
 
@@ -475,6 +476,7 @@ function loadProductsTable(sort='none'){
             quickSearchOnProductTable();
             searchFromPriceOnProductTable();
             searchToPriceOnProductTable();
+
         }
     });
 } 
@@ -572,7 +574,6 @@ function editButtonClick(button){
         cache: false,
         success:function(data){
             let result = $.parseJSON(data);
-            console.log(result);
             $('#productID').val(result.id);
             $('#productName').val(result.name);
             $('#productPrice').val(result.price);

@@ -34,8 +34,10 @@
     <link href="<?php echo URLROOT; ?>/css/core-admin-custom.css" rel="stylesheet">
 
     <script src="<?php echo URLROOT; ?>/js/js_config.js"></script>
+    <script src="<?php echo URLROOT; ?>/js/jquery-3.3.1.min.js"></script>
 
 </head>
 
 <body class="animsition">
     <?php require APPROOT . '/views/inc/admin-main-navbar.php'; ?>
+    <?php require APPROOT . '/views/inc/toTopBtn.php'; ?>

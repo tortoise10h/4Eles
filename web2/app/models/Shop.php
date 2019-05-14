@@ -222,6 +222,13 @@
             $row = $this->db->singleResult();
             return $row;    
         }
+
+        public function adminGetProductDetail($productID){
+            $this->db->query("SELECT * FROM products WHERE id = :id");
+            $this->db->bind(':id',$productID);
+            $row = $this->db->singleResult();
+            return $row;    
+        }
         
     }
 ?> 

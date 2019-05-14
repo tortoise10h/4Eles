@@ -22,8 +22,10 @@
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/style.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/product-detail.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/core-custom.css">
+    <script src="<?php echo URLROOT; ?>/js/jquery-3.3.1.min.js"></script>
     
   </head>
   <body>
     <div class="site-wrap">
   	<?php require APPROOT . '/views/inc/navbar.php'; ?>
+        <?php require APPROOT . '/views/inc/toTopBtn.php'; ?>
