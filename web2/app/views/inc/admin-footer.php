@@ -23,6 +23,7 @@
     <script src="<?php echo URLROOT; ?>/js/main-admin.js"></script>
     <script src="<?php echo URLROOT; ?>/js/admin-products.js"></script>
     <script src="<?php echo URLROOT; ?>/js/admin-orders.js"></script>
+    <script src="<?php echo URLROOT; ?>/js/admin-users.js"></script>
     
 
 </body>

@@ -5,6 +5,7 @@
             $this->shopModel = $this->model('Shop');
             $this->userModel = $this->model('User');
             $this->billModel = $this->model('Bill');
+            $this->profileModel = $this->model('Profile');
         }
 
         public function index(){
@@ -51,6 +52,38 @@
                 'products' => $productArr,
             ];
             
+            echo json_encode($result);
+        }
+
+        public function checkBillQuantity($orderID){
+            $billDetails = $this->billModel->getBillDetailByBillID($orderID);
+            $textResult = [];
+            $is_bill_ok = true;
+            $result = [
+                'status' => $is_bill_ok,
+                'textResult' => $textResult
+            ];
+            foreach($billDetails as $billDetail){
+                $product = $this->shopModel->adminGetProductDetail($billDetail->productID);
+                if($billDetail->quantity > $product->total){
+                    $temp = [
+                        'productID' => $product->id,
+                        'productName' => $product->name
+                    ];
+                    $textResult[] = $temp;
+                    $is_bill_ok = false;
+                }
+            }  
+
+            $status = 'true';
+            if($is_bill_ok == false){
+                $status = 'false';
+            }
+            $result = [
+                'status' => $status,
+                'textResult' => $textResult
+            ];
+
             echo json_encode($result);
         }
 
@@ -261,6 +294,7 @@
             }
         }
 
+        /*** FOR ORDER ***/
 
 
         public function getOrders($sort = 'none'){
@@ -330,6 +364,154 @@
                 echo 1;
             }else{
                 echo 0;
+            }
+        }
+
+
+        /***FOR USERS***/
+        public function getUsers($sort = 'none'){
+            
+            $users = $this->adminModel->getAllUsers($sort);
+            
+            $userArr = [];
+            
+            foreach($users as $user){
+                $userArr[] = [
+                    'id' => $user->id,
+                    'firstname' => $user->firstname,
+                    'lastname' => $user->lastname,
+                    'email' => $user->email,
+                    'phone' => $user->phone,
+                    'sex' => $user->sex,
+                    'status' => $user->status
+                ];
+            }
+            
+            $result = [
+                'users' => $userArr,
+            ];
+            
+            echo json_encode($result);
+        }
+
+
+        public function getUserInfo($userID){
+            $user = $this->userModel->getUserInfoById($userID);
+            $row = [
+                'id' => $user->id,
+                'firstname' => $user->firstname,
+                'lastname' => $user->lastname,
+                'email' => $user->email,
+                'phone' => $user->phone,
+                'sex' => $user->sex,
+                'status' => $user->status,
+                'roleID' => $user->roleID,
+            ];
+
+            echo json_encode($row);
+        }
+
+        public function changeUserRole($userID,$roleID){
+            $currentUser = $this->getCurrentUserAndParseToAssocArr();
+            if($currentUser['id'] == $userID){
+                echo 3;
+            }else{
+                if($this->adminModel->changeUserRole($userID,$roleID)){
+                    echo 1;
+                }else{
+                    echo 0;
+                }
+            }
+        }
+
+        public function resetPassword($userID){
+            $currentUser = $this->getCurrentUserAndParseToAssocArr();
+            $defaultPassword = '123456';
+            $defaultPassword = password_hash($defaultPassword,PASSWORD_DEFAULT);
+
+            if($currentUser['id'] == $userID){
+                echo 3;
+            }else{
+                if($this->adminModel->resetPassword($userID,$defaultPassword)){
+                    echo 1;
+                }else{
+                    echo 0;
+                }
+            }
+        }
+
+        public function blockUser($userID){
+            $currentUser = $this->getCurrentUserAndParseToAssocArr();
+            if($currentUser['id'] == $userID){
+                echo 3;
+            }else{
+                if($this->adminModel->blockUser($userID)){
+                    echo 1;
+                }else{
+                    echo 0;
+                }
+            }
+        }
+        
+        public function unblockUser($userID){
+            $currentUser = $this->getCurrentUserAndParseToAssocArr();
+            if($currentUser['id'] == $userID){
+                echo 3;
+            }else{
+                if($this->adminModel->unblockUser($userID)){
+                    echo 1;
+                }else{
+                    echo 0;
+                }
+            }
+        }
+        
+        
+
+        public function getCurrentUserAndParseToAssocArr(){
+            $userId = $this->getUserSession();
+            $user = $this->profileModel->getUserInfoById($userId);
+            $result = [
+                'id' => $userId,
+                'email' => $user->email,
+                'firstname' => $user->firstname,
+                'lastname' => $user->lastname,
+                'phone' => $user->phone,
+                'address' => $user->address,
+                'sex' => $user->sex,
+                'password' => $user->password,
+                'birthday' => $user->birthday,
+                'statuts' => $user->status
+            ];
+
+            return $result;
+        }
+
+        public function checkEmail($email){
+            if($this->userModel->findUserByEmail($email) == false){
+                echo 1;
+            }else{
+                echo 0;
+            }
+        }
+
+        function createNewAccount($email,$role){
+            $defaultPassword = '123456';
+            $defaultPassword = password_hash($defaultPassword,PASSWORD_DEFAULT);
+
+            if($this->adminModel->createNewAccount($email,$role,$defaultPassword)){
+                echo 1;
+            }else{
+                echo 0;
+            }
+
+        }
+
+        public function getUserSession(){
+            if(!empty($_SESSION['user_id'])){
+                return $_SESSION['user_id'];
+            }else{
+                return "none-user";
             }
         }
     }

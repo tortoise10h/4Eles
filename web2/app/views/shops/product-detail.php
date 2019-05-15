@@ -68,7 +68,7 @@
                         </div>  
                         <div class="mb-5">
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-8">
                                     <div class="input-group mb-3" style="max-width: 120px;">
                                         <div class="input-group-prepend">
                                             <button class="btn btn-outline-primary js-btn-minus" type="button">&minus;</button>
@@ -79,9 +79,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-2 add-to-wish">
-                                    <p id="addToWish"><i style="font-size:35px;" class="far fa-heart"></i></p>
-                                </div>
+
                                 <div class="col-md-4">
                                     <p><button id="addCartBtn" data="<?php echo $data['product']->id ?>" class="buy-now btn btn-sm btn-primary">Add To Cart</button></p>
                                 </div>

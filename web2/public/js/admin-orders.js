@@ -2,14 +2,14 @@
 $(document).ready(function(){
     let currentLink = window.location.href;
     if(currentLink.split('/')[4] == 'admins' && currentLink.split('/')[5] == 'orders'){
-    	loadOrdersTable();
-    	orderQuickSearch();
-    	searchFromPriceOnProductTable();
-    	searchToPriceOnProductTable();
-    	sortFromDate();
+        loadOrdersTable();
+        orderQuickSearch();
+        searchFromPriceOnOrderTable();
+        searchToPriceOnOrderTable();
+        sortFromDate();
         sortToDate();
-    	orderSort();
-    	console.log("admin order page ");
+        orderSort();
+        console.log("admin order page ");
     }
 });
 
@@ -19,7 +19,7 @@ function loadOrdersTable(sort='none'){
         type: 'POST', 
         cache: false,
         success:function(data){
-
+            console.log(data);
             let result = $.parseJSON(data);
             let ordersShow = createOrderTableBody(result.orders);
             $('#orderTableBody').html(ordersShow);
@@ -33,21 +33,21 @@ function loadOrdersTable(sort='none'){
 function createOrderTableBody(orders){
     let text = '';
     $.each(orders,function(tag,order){
-    	//handle operation select box
-    	let selectOperation = '<select onchange="orderStatusChange(this)" id="' + order.id + '" class="rounded ">';
-    	for(let i = 1; i <= 4; i++){
-    		if(order.processStatus == i){
-    			selectOperation += '<option value="' + i + '" selected>' + parseProcessStatusToString(i) + "</option>";
-    		}else{
-    			selectOperation += '<option value="' + i + '">' + parseProcessStatusToString(i) + "</option>";
-    		}
-    	}
-    	selectOperation += '</select>';
+        //handle operation select box
+        let selectOperation = '<select onchange="orderStatusChange(this)" id="' + order.id + '" class="rounded ">';
+        for(let i = 1; i <= 4; i++){
+                if(order.processStatus == i){
+                        selectOperation += '<option value="' + i + '" selected>' + parseProcessStatusToString(i) + "</option>";
+                }else{
+                        selectOperation += '<option value="' + i + '">' + parseProcessStatusToString(i) + "</option>";
+                }
+        }
+        selectOperation += '</select>';
                           
         text += '<tr>' +
-        		'<td style="max-width:30px">'+
-        		'<button data="' + order.id + '" data-toggle="modal" data-target="#orderInfo" onclick="showOrderInfo(this)"><i class="fas fa-info-circle" style="font-size:18px"></i></button>' +
-        		'</td>'+
+                        '<td style="max-width:30px">'+
+                        '<button data="' + order.id + '" data-toggle="modal" data-target="#orderInfo" onclick="showOrderInfo(this)"><i class="fas fa-info-circle" style="font-size:18px"></i></button>' +
+                        '</td>'+
                 '<td>' + order.id + '</td>' +
                 '<td style="max-width:50px">$' + order.totalPrice + '</td>' + 
                 '<td>' + order.date + '</td>' +
@@ -60,18 +60,18 @@ function createOrderTableBody(orders){
 }
 
 function showOrderInfo(button){
-	let orderID = $(button).attr('data');
+    let orderID = $(button).attr('data');
     $.ajax({
         url: URLROOT + '/admins/getOrderInfo/' + orderID,
         type: 'POST',
         cache: false,
         success:function(data){
-        	let result = $.parseJSON(data);
+                let result = $.parseJSON(data);
             let tableBody = '';
             let totalPrice = 0;
             for(let i = 0; i < result.billDetails.length; i++){
-            	tableBody += '<tr>' +
-            				  '<td>' + result.billDetails[i].productName +'</td>' +
+                tableBody += '<tr>' +
+                                          '<td>' + result.billDetails[i].productName +'</td>' +
                               '<td>' + result.billDetails[i].quantity + '</td>' +
                               '<td>$' + result.billDetails[i].totalPrice + '</td>'+
                               '</tr>';
@@ -93,24 +93,58 @@ function orderStatusChange(select){
     let processStatus = select.options[select.selectedIndex].value;
     let orderID = $(select).attr('id');
     if(confirm('Are you sure that you want to change status of this bill?')){
-    	changeProcessStatusOfOrder(processStatus,orderID);
+        changeProcessStatusOfOrder(processStatus,orderID);
     }
 }
 
 function changeProcessStatusOfOrder(processStatus,orderID){
-	$.ajax({
-		url: URLROOT + '/admins/changeProcessStatusOfOrder/' + processStatus + '/' + orderID,
-        type: 'POST',
-        cache: false,
-        success:function(data){
-        	if(data == 1){
-        		loadOrdersTable();
-        	}else{
-        		console.log(data);
-        	}
-        }
-	});
+    if(processStatus == 2 || processStatus == 3){
+        $.ajax({
+           url: URLROOT + '/admins/checkBillQuantity/' + orderID,
+            type: 'POST',
+            cache: false,
+            success:function(data){
+                console.log(data);
+                let result = $.parseJSON(data);
+                if(result.status == 'true'){
+                    $.ajax({
+                        url: URLROOT + '/admins/changeProcessStatusOfOrder/' + processStatus + '/' + orderID,
+                        type: 'POST',
+                        cache: false,
+                        success:function(data){
+                            if(data == 1){
+                                 loadOrdersTable();
+                            }else{
+                                    console.log(data);
+                            }
+                        }
+                    });
+                }else if(result.status == 'false'){
+                    let text = "Product quantity is not enough, list of products: \n";
+                    for(let i = 0; i < result.textResult.length; i++){
+                        text += " - " + result.textResult[i]['productID'] + " : " + result.textResult[i]['productName'] + "\n";
+                    }
+                    alert(text);
+                    loadOrdersTable();
+                }
+            } 
+        });
+    }else{
+        $.ajax({
+            url: URLROOT + '/admins/changeProcessStatusOfOrder/' + processStatus + '/' + orderID,
+            type: 'POST',
+            cache: false,
+            success:function(data){
+                if(data == 1){
+                     loadOrdersTable();
+                }else{
+                        console.log(data);
+                }
+            }
+        });
+    }
 }
+
 
 function orderQuickSearch(){
     let rows = document.getElementById('orderTableBody').getElementsByTagName('tr');
@@ -129,7 +163,7 @@ function orderQuickSearch(){
     });
 }
 
-function searchFromPriceOnProductTable(){
+function searchFromPriceOnOrderTable(){
     let rows = document.getElementById('orderTableBody').getElementsByTagName('tr');
 
     $('#orderFromPriceBox').on('keyup',function(){
@@ -152,7 +186,7 @@ function searchFromPriceOnProductTable(){
         }       
     });   
 }
-function searchToPriceOnProductTable(){
+function searchToPriceOnOrderTable(){
     let rows = document.getElementById('orderTableBody').getElementsByTagName('tr');
 
     $('#orderToPriceBox').on('keyup',function(){
@@ -262,23 +296,23 @@ function sortToDate(){
 }
 
 function orderSort(){
-	$('#orderSort').on('change',function(){
-    	let selectTag = document.getElementById('orderSort');
+        $('#orderSort').on('change',function(){
+        let selectTag = document.getElementById('orderSort');
             let sort = selectTag.options[selectTag.selectedIndex].value;
             loadOrdersTable(sort);
-	})
+        })
 }
 
 function parseProcessStatusToString(processStatus){
-	if(processStatus == 1){
-		return "Processing";
-	}else if(processStatus == 2){
-		return "Delivering";
-	}else if(processStatus == 3){
-		return "Success";
-	}else if(processStatus == 4){
-		return "Cancel";
-	}
+        if(processStatus == 1){
+                return "Processing";
+        }else if(processStatus == 2){
+                return "Delivering";
+        }else if(processStatus == 3){
+                return "Success";
+        }else if(processStatus == 4){
+                return "Cancel";
+        }
 }
 
 var dates = {

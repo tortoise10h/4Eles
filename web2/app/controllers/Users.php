@@ -68,6 +68,14 @@
                     echo json_encode($result);
                     $is_ok = false;
                 }
+                if($this->userModel->checkUserBlock($data['email']) == false){
+                    $result = [
+                        'alert' => '<p class="alert alert-danger">User was blocked</p>',
+                        'status' => 'error'
+                    ];
+                    echo json_encode($result);
+                    $is_ok = false;
+                }
                 if($is_ok == true){
                     $loggedInUser = $this->userModel->login($data['email'],$data['password']);
                     if($loggedInUser){

@@ -52,6 +52,17 @@
                 return true;
             }else{
                 return false;
+            } 
+        }
+
+        public function checkUserBlock($email){
+            $this->db->query("SELECT * FROM users WHERE email = :email");
+            $this->db->bind(':email',$email);
+            $row = $this->db->singleResult();
+            if($row->status == 1){
+                return true;
+            }else{
+                return false;
             }
         }
 

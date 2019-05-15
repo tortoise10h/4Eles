@@ -24,7 +24,7 @@
             $searchValue = '';
             $page = 1;
             if(isset($_GET['search'])){
-                $searchValue = $_GET['search'];
+                $searchValue = htmlspecialchars($_GET['search']);
             }
             if(isset($_GET['page'])){
                 $page = $_GET['page'];

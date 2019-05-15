@@ -19,7 +19,7 @@
                                         <div class="col-md-6">
                                             <label for="username_txt" class="control-label requiredField">First name<span class="asteriskField">*</span> </label>
                                             <input class="input-md  textinput textInput form-control" id="firstname_txt" maxlength="30" name="first_name" placeholder="Your first name" style="margin-bottom: 10px" type="text" value="<?php echo $data['currentUser']['firstname'] ?>">  
-                                            <div id="firstname-alert" style="color:red"></div>
+                                            <div id="firstname-alertt" style="color:red"></div>
                                         </div>
                                         <div class="col-md-6">
                                             <label for="username_txt" class="control-label requiredField">Last name<span class="asteriskField">*</span> </label>

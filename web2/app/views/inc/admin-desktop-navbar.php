@@ -7,22 +7,24 @@
             <div class="menu-sidebar__content js-scrollbar1">
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
-                        <li>
-                            <a href="<?php echo URLROOT; ?>/admins/products">
-                                <i class="fab fa-product-hunt"></i>Products</a>
-                        </li>
-                        <li>
-                            <a href="<?php echo URLROOT; ?>/admins/users">
-                                <i class="fas fa-user"></i>Users</a>
-                        </li>
-                        <li>
-                            <a href="<?php echo URLROOT; ?>/admins/orders">
-                                <i class="fab fa-elementor"></i>Orders</a>
-                        </li>
-                        <li>
-                            <a href="<?php echo URLROOT; ?>/admins/statistics">
-                                <i class="fas fa-chart-line"></i>Statistic</a>
-                        </li>
+                        <?php if($_SESSION['user_role'] == 9) : ?>
+                            <li>
+                                <a href="<?php echo URLROOT; ?>/admins/products">
+                                    <i class="fab fa-product-hunt"></i>Products</a>
+                            </li>
+                        <?php endif; ?>
+                        <?php if($_SESSION['user_role'] == 99) : ?>
+                            <li>
+                                <a href="<?php echo URLROOT; ?>/admins/users">
+                                    <i class="fas fa-user"></i>Users</a>
+                            </li>
+                        <?php endif; ?>
+                        <?php if($_SESSION['user_role'] == 9) : ?>
+                            <li>
+                                <a href="<?php echo URLROOT; ?>/admins/orders">
+                                    <i class="fab fa-elementor"></i>Orders</a>
+                            </li>
+                        <?php endif; ?>
                         <li>
                             <a href="<?php echo URLROOT; ?>/pages/index">
                             <i class="fas fa-sign-out-alt"></i>Go To Shopping Page</a>

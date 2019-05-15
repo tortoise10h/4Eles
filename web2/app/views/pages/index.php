@@ -5,9 +5,9 @@
           <div class="col-md-5 text-center text-md-left pt-5 pt-md-0 bg-light rounded shadow-sm">
             <h1 class="mb-2">Ready to shop with us?</h1>
             <div class="intro-text text-center text-md-left">
-              <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus at iaculis quam. Integer accumsan tincidunt fringilla. </p>
+              <p class="mb-4">Find anything you want, we have an Avenger</p>
               <p>
-                <a href="<?php echo URLROOT ?>/shops/index" class="btn btn-sm btn-primary">Shop Now</a>
+	        <a href="<?php echo URLROOT; ?>/shops/index" class="btn btn-sm btn-primary">Shop Now</a>
               </p>
             </div>
           </div>
@@ -32,8 +32,9 @@
               <span class="icon-refresh2"></span>
             </div>
             <div class="text">
-              <h2 class="text-uppercase">Free Returns</h2>
+              <h2 class="text-uppercase">Free Returns</h2> 
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus at iaculis quam. Integer accumsan tincidunt fringilla.</p>
+            </div>
             </div>
           </div>
           <div class="col-md-6 col-lg-4 d-lg-flex mb-4 mb-lg-0 pl-4" data-aos="fade-up" data-aos-delay="200">
@@ -48,12 +49,11 @@
         </div>
       </div>
     </div>
-
     <div class="site-section site-blocks-2">
       <div class="container">
         <div class="row">
           <div class="col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0" data-aos="fade" data-aos-delay="">
-            <a class="block-2-item" href="<?php echo URLROOT; ?>/shops/index/category=fig">
+	  <a class="block-2-item" href="<?php echo URLROOT; ?>/shops/index/category=fig">
               <figure class="image">
                 <img src="<?php echo URLROOT ?>/images/banner/figure-banner.jpg" alt="" class="img-fluid category-banner-img">
               </figure>
@@ -86,13 +86,13 @@
             </a>
           </div>
           <div class="col-sm-6 col-md-6 col-lg-3 mb-5 mb-lg-0" data-aos="fade" data-aos-delay="200">
-            <a class="block-2-item" href="<?php echo URLROOT; ?>/shops/index/category=hat">
+	  <a class="block-2-item" href="<?php echo URLROOT; ?>/shops/index/category=hat">
               <figure class="image">
                 <img src="<?php echo URLROOT ?>/images/banner/hat-banner.jpg" alt="" class="img-fluid category-banner-img">
               </figure>
               <div class="text">
                 <span class="text-uppercase">Collections</span>
-                <h3>Pokemon Hat</h3>
+                <h3>Pokemon &nbsp Hat</h3>
               </div>
             </a>
           </div>
@@ -113,63 +113,47 @@
               <div class="item">
                 <div class="block-4 text-center">
                   <figure class="block-4-image">
-                    <img src="images/cloth_1.jpg" alt="Image placeholder" class="img-fluid">
+                    <img src="<?php echo URLROOT; ?>/images/products/fig/fig12/fig12_1.jpg" alt="" class="img-fluid">
                   </figure>
                   <div class="block-4-text p-4">
-                    <h3><a href="#">Tank Top</a></h3>
-                    <p class="mb-0">Finding perfect t-shirt</p>
-                    <p class="text-primary font-weight-bold">$50</p>
+                    <h3><a href="<?php echo URLROOT; ?>/shops/productDetail/fig12/fig12">Pokémon Gallery Figure: Eevee—Swift</a></h3>
+                    <p class="text-primary font-weight-bold">$54</p>
                   </div>
                 </div>
               </div>
               <div class="item">
                 <div class="block-4 text-center">
                   <figure class="block-4-image">
-                    <img src="images/shoe_1.jpg" alt="Image placeholder" class="img-fluid">
+                    <img src="<?php echo URLROOT; ?>/images/products/plu/plu13/plu13_1.jpg" alt="" class="img-fluid">
                   </figure>
                   <div class="block-4-text p-4">
-                    <h3><a href="#">Corater</a></h3>
-                    <p class="mb-0">Finding perfect products</p>
-                    <p class="text-primary font-weight-bold">$50</p>
+                    <h3><a href="<?php echo URLROOT; ?>/shops/productDetail/plu/plu13">Mimikyu Eerie Delights Poké Plush - 9 1/2 In</a></h3>
+                    <p class="text-primary font-weight-bold">$46</p>
                   </div>
                 </div>
               </div>
               <div class="item">
                 <div class="block-4 text-center">
                   <figure class="block-4-image">
-                    <img src="images/cloth_2.jpg" alt="Image placeholder" class="img-fluid">
+                    <img src="<?php echo URLROOT; ?>/images/products/hat/hat12/hat12_1.jpg" alt="" class="img-fluid">
                   </figure>
                   <div class="block-4-text p-4">
-                    <h3><a href="#">Polo Shirt</a></h3>
-                    <p class="mb-0">Finding perfect products</p>
-                    <p class="text-primary font-weight-bold">$50</p>
+                    <h3><a href="<?php echo URLROOT; ?>/shops/productDetail/hat/hat12">Pikachu Silhouette Sync 9FIFTY Baseball Cap by New Era</a></h3>
+                    <p class="text-primary font-weight-bold">$60</p>
                   </div>
                 </div>
               </div>
               <div class="item">
                 <div class="block-4 text-center">
                   <figure class="block-4-image">
-                    <img src="images/cloth_3.jpg" alt="Image placeholder" class="img-fluid">
+                    <img src="<?php echo URLROOT; ?>/images/products/shi/shi13/shi13_1.jpg" alt="I" class="img-fluid">
                   </figure>
                   <div class="block-4-text p-4">
-                    <h3><a href="#">T-Shirt Mockup</a></h3>
-                    <p class="mb-0">Finding perfect products</p>
-                    <p class="text-primary font-weight-bold">$50</p>
+                    <h3><a href="<?php echo URLROOT; ?>/shops/productDetail/shi/shi13">Mew 151 Cut Adult Crewneck T-Shirt - S</a></h3>
+                    <p class="text-primary font-weight-bold">$58</p>
                   </div>
                 </div>
-              </div>
-              <div class="item">
-                <div class="block-4 text-center">
-                  <figure class="block-4-image">
-                    <img src="images/shoe_1.jpg" alt="Image placeholder" class="img-fluid">
-                  </figure>
-                  <div class="block-4-text p-4">
-                    <h3><a href="#">Corater</a></h3>
-                    <p class="mb-0">Finding perfect products</p>
-                    <p class="text-primary font-weight-bold">$50</p>
-                  </div>
-                </div>
-              </div>
+              </div> 
             </div>
           </div>
         </div>

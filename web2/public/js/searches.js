@@ -8,6 +8,9 @@ $(document).ready(function(){
             if(keyCode == 13){
                 e.preventDefault();
                 let inputValue = $("#searchInput").val().toLowerCase();
+                console.log(inputValue);
+                inputValue = inputValue.replace("\'",'');
+                console.log(inputValue);
                 let subLink = URLROOT + '/searches/index?search=' + inputValue + "&page=" + urlArr[2];
                 //use window.history.pushState to change url
                 window.history.pushState('','',subLink);    //change url but not refresh page
@@ -21,6 +24,7 @@ $(document).ready(function(){
 
 
         function loadProducts(searchValue = '', page = 1){
+            searchValue = searchValue.replace("%27",'"');
             $.ajax({
                 url: URLROOT + '/searches/getSearchProducts?search=' + searchValue + "&page=" + page,
                 type: 'POST',

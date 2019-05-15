@@ -90,6 +90,7 @@ $(document).ready(function(){
                    if(products == false){
                         console.log('False');
                         $('#cartProductTable').html('<div class="rounded-0 p-5 alert alert-warning" style="border-left:5px solid orange">Your cart is empty now </div>');
+                        $('#cartTotal').html('');
                     }else{
                         $('#cartProductTable').html(createCartProductTable(products,userID));
                         $('#cartTotal').html(createCartTotal(products));

@@ -31,7 +31,7 @@
                 $billDetails = [];
                 //get bill detail follow by bill id
                 foreach($billDetailList as $billDetail){
-                    $product = $this->shopModel->getProductDetail($billDetail->productID);
+                    $product = $this->shopModel->adminGetProductDetail($billDetail->productID);
                     $temp = [
                         'productName' => $product->name,
                         'quantity' => $billDetail->quantity,

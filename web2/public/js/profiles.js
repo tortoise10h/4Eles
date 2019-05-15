@@ -55,17 +55,17 @@ $(document).ready(function(){
             let is_ok = true;
             //validate first name
             if($('#firstname_txt').val() == ""){
-                profileAlertMessage('#firstname_txt',"#firstname-alert","Your first name must be filled",is_ok);
+                profileAlertMessage('#firstname_txt',"#firstname-alertt","Your first name must be filled",is_ok);
                 is_ok = false;
                 e.preventDefault();
             }else{
                 if(/^[^\d\[\]`!@#$%^&*()_+\\{}|;':\",./<>?]*$/.test($('#firstname_txt').val()) == false){
-                    profileAlertMessage('#firstname_txt',"#firstname-alert","We don't allow special characters in first name field",is_ok);
+                    profileAlertMessage('#firstname_txt',"#firstname-alertt","We don't allow special characters in first name field",is_ok);
                     is_ok = false;
                     e.preventDefault();
                 }else{
                     $('#firstname_txt').removeClass("alert alert-danger");
-                    $('#firstname-alert').html("");
+                    $('#firstname-alertt').html("");
                 }
             }
 
@@ -81,8 +81,8 @@ $(document).ready(function(){
                     is_ok = false;
                     e.preventDefault();
                 }else{
-                    $('#firstname_txt').removeClass("alert alert-danger");
-                    $('#firstname-alert').html("");
+                    $('#lastname_txt').removeClass("alert alert-danger");
+                    $('#lastname-alert').html("");
                 }
             }
 
@@ -97,8 +97,8 @@ $(document).ready(function(){
                     is_ok = false;
                     e.preventDefault();
                 }else{
-                    $('#firstname_txt').removeClass("alert alert-danger");
-                    $('#firstname-alert').html("");
+                    $('#phonenum_txt').removeClass("alert alert-danger");
+                    $('#phonenum-alert').html("");
                 }
             
             } 
@@ -112,6 +112,9 @@ $(document).ready(function(){
                     profileAlertMessage('#birthday_txt',"#birthday-alert","Our website is NOT for people under 5 years old",is_ok);
                     is_ok = false;
                 }
+            }else{
+                $('#birthday_txt').removeClass("alert alert-danger");
+                $('#birthday-alert').html("");
             }
 
             if(is_ok == false){

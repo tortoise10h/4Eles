@@ -114,7 +114,6 @@
             }
         }
 
-
         /*** FOR ORDERS ***/
         public function getAllOrders($sort){
 
@@ -149,5 +148,82 @@
             }
         }
 
+
+        /*** FOR USERS ***/
+        public function getAllUsers($sort){
+
+            $query = 'SELECT * FROM users ';
+
+            //sort handle
+            // if($sort == 'nameAToZ'){
+            //     $query .= " ORDER BY created_at DESC";
+            // }elseif($sort == 'dateOldToNew'){
+            //     $query .= " ORDER BY created_at ASC";
+            // }elseif($sort == 'priceLowToHigh'){
+            //     $query .= " ORDER BY totalPrice ASC";
+            // }elseif($sort == 'priceHighToLow'){
+            //     $query .= " ORDER BY totalPrice DESC";
+            // }
+
+            $this->db->query($query);
+
+            $users = $this->db->resultSet();
+            return $users;
+        }
+
+        public function changeUserRole($userID,$roleID){
+            $this->db->query("UPDATE users SET roleID = :roleID WHERE id = :id");
+            $this->db->bind(':roleID',$roleID);
+            $this->db->bind(':id',$userID);
+            if($this->db->execute()){
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        public function resetPassword($userID,$password){
+            $this->db->query("UPDATE users SET password = :password WHERE id = :id");
+            $this->db->bind(':password',$password);
+            $this->db->bind(':id',$userID);
+            if($this->db->execute()){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        public function blockUser($userID){
+            $this->db->query("UPDATE users SET status = :status WHERE id = :id");
+            $this->db->bind(':status',false);
+            $this->db->bind(':id',$userID);
+            if($this->db->execute()){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        
+        public function unblockUser($userID){
+            $this->db->query("UPDATE users SET status = :status WHERE id = :id");
+            $this->db->bind(':status',true);
+            $this->db->bind(':id',$userID);
+            if($this->db->execute()){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        
+        public function createNewAccount($email,$role,$password){
+            $this->db->query("INSERT INTO users(email,password,roleID) VALUES(:email,:password,:roleID);");
+            $this->db->bind(':email',$email);
+            $this->db->bind(':password',$password);
+            $this->db->bind(':roleID',$role);
+            if($this->db->execute()){
+                return true;
+            }else{
+                return false;
+            }
+        }
     }
 ?>

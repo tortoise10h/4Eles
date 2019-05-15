@@ -1,5 +1,6 @@
 <?php require APPROOT . '/views/inc/admin-header.php'; ?>
             <!-- MAIN CONTENT-->
+            <?php if($_SESSION['user_role'] == 9) : ?>    
             <div class="main-content" style="overflow-X:scroll">
                 <div class="section__content section__content--p30">
                     <div class="container">
@@ -122,5 +123,10 @@
         <!-- END ORDER INFO DIALOG -->
 
     </div>
+    <?php elseif($_SESSION['user_role'] == 99): ?>
+        <script type="text/javascript">window.location.href = URLROOT + '/admins/users'</script>
+    <?php else : ?>
+        <script type="text/javascript">window.location.href = URLROOT + '/pages/index'</script>
+    <?php endif; ?>
 
 <?php require APPROOT . '/views/inc/admin-footer.php'; ?>
