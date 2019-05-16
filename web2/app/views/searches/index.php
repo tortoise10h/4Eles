@@ -4,10 +4,10 @@
             <div class="border p-4 rounded mb-4">
                 <h3 class="mb-3 h6 text-uppercase text-black d-block text-center">Move To Shop Categories</h3>
                 <ul class="list-unstyled mb-0">
-                <li class="mb-1"><a class="category-btn d-flex category-link" id="fig" href="http://localhost:8080/web2/shops/index/category=fig" ><span><i class="fas fa-paw"></i>  Figure</span> <span class="ml-auto">(<?php echo $data['figCount']; ?>)</span></a></li>
-                <li class="mb-1"><a class="category-btn d-flex category-link" id="plu" href="http://localhost:8080/web2/shops/index/category=plu" ><span><i class="fas fa-cat"></i> Plush</span> <span class="ml-auto">(<?php echo $data['pluCount']; ?>)</span></a></li>
-                <li class="mb-1"><a class="category-btn d-flex category-link" id="hat" href="http://localhost:8080/web2/shops/index/category=hat" ><span><i class="fas fa-hat-wizard"></i> Hat</span> <span class="ml-auto">(<?php echo $data['hatCount']; ?>)</span></a></li>
-                <li class="mb-1"><a class="category-btn d-flex category-link" id="shi" href="http://localhost:8080/web2/shops/index/category=shi" ><span><i class="fas fa-tshirt"></i> Shirt</span> <span class="ml-auto">(<?php echo $data['shiCount']; ?>)</span></a></li>
+		<li class="mb-1"><a class="category-btn d-flex category-link" id="fig" href="<?php echo URLROOT; ?>/web2/shops/index/category=fig" ><span><i class="fas fa-paw"></i>  Figure</span> <span class="ml-auto">(<?php echo $data['figCount']; ?>)</span></a></li>
+                <li class="mb-1"><a class="category-btn d-flex category-link" id="plu" href="<?php echo URLROOT; ?>/shops/index/category=plu" ><span><i class="fas fa-cat"></i> Plush</span> <span class="ml-auto">(<?php echo $data['pluCount']; ?>)</span></a></li>
+		<li class="mb-1"><a class="category-btn d-flex category-link" id="hat" href="<?php echo URLROOT; ?>/shops/index/category=hat" ><span><i class="fas fa-hat-wizard"></i> Hat</span> <span class="ml-auto">(<?php echo $data['hatCount']; ?>)</span></a></li>
+		<li class="mb-1"><a class="category-btn d-flex category-link" id="shi" href="<?php echo URLROOT; ?>/shops/index/category=shi" ><span><i class="fas fa-tshirt"></i> Shirt</span> <span class="ml-auto">(<?php echo $data['shiCount']; ?>)</span></a></li>
                 </ul>
             </div>
         </div>
