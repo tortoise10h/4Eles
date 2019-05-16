@@ -171,27 +171,7 @@ $(document).ready(function(){
         
         
         function removeCartProduct(productID,userID){
-            // $.ajax({
-            //     url: 'http://localhost:8080/web2/users/isLogin',
-            //     type: 'POST',
-            //     cache:false,
-            //     success:function(data){
-            //        data = $.parseJSON(data);
-            //        if(data.status == 'true'){
-            //            $.ajax({
-            //             url: 'http://localhost:8080/web2/carts/removeCartProduct/' + productID + "/" + data.userID,
-            //             type: 'POST',
-            //             cache:false,
-            //             success:function(data){
-            //                 loadCartProductTable();
-            //             }
-            //            });
-            //        }else if(data.status == 'false'){
-            //            //if user doesn't login -> through notification
-            //            $('#cartProductTable').html('<div class="rounded-0 p-5 alert alert-danger" style="border-left:5px solid red">You have to login to see your cart</div>')
-            //        }
-            //     }
-            // });
+                        
             $.ajax({
                 url: URLROOT + '/carts/removeCartProduct/' + productID + "/" + userID,
                 type: 'POST',
